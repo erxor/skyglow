@@ -3,7 +3,7 @@
 from tkinter import *
 from tkinter import ttk
 from twitter import *
- from os.path import isfile
+from os.path import isfile
 
 def säutsumine():
     twitter.statuses.update(status=twiidikast.get('1.0',END))
