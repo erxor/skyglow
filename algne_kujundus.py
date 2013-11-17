@@ -2,8 +2,6 @@
 #username ja muud asjad paika, kasti sisse twiitidele eraldi kastid äkki? modi akna suurust
 from tkinter import *
 from tkinter import ttk
-from twitter import *
-from os.path import *
 
 def säutsumine():
     twitter.statuses.update(status=twiidikast.get('1.0',END))
