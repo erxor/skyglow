@@ -2,9 +2,13 @@
 #username ja muud asjad paika, kasti sisse twiitidele eraldi kastid äkki? modi akna suurust
 from tkinter import *
 from tkinter import ttk
+from twitter import *
+from os.path import *
 
 def säutsumine():
     twitter.statuses.update(status=twiidikast.get('1.0',END))
+    twiidikast.delete('1.0', END)
+    twiidikast.insert('1.0', 'Sisesta siia oma twiit')
 
 def twiit(a,b,c):
     twiit = ttk.Label(raam, wraplength = 290,text = a)
@@ -15,8 +19,7 @@ raam = Tk()
 raam.title("Voldemar")
 raam.geometry("620x420")
 
-from twitter import *
-from os.path import *
+
 CONSUMER_KEY = "OyremhLVargLoqBAG2PZwQ" #voldemari consumer key
 CONSUMER_SECRET = "25GrCT1ItNRnHmMQc4QRD1qUpm8jvY1HTzsaYHqLCBE" #voldemari consumer secret
 kasutajanimi = "E_R_K_I" #kasutajanimi
