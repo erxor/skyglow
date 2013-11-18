@@ -13,6 +13,9 @@ def säutsumine():
     twiidikast.delete('1.0', END)
     twiidikast.insert('1.0', 'Sisesta siia oma twiit...')
 
+def kustuta_tekst(n):
+    twiidikast.delete('1.0', END)
+
 def twiit(a,b,c):
     twiit = ttk.Label(raam, wraplength = 290,text = a)
     twiit.place(x = b, y = c)
@@ -79,6 +82,9 @@ nupp5.grid(column=1, row=6, pady=5, sticky = (E))
 twiidikast = Text(raam, width=30, height=5, wrap = 'word')
 twiidikast.grid(column=1, row = 5)
 twiidikast.insert('1.0','Sisesta siia oma tweet...')
+twiidikast.tag_add('vajutus', '1.0', 'end')#muudame vajutusel teksti mustaks
+twiidikast.tag_configure('vajutus', foreground = 'gray')
+twiidikast.tag_bind('vajutus', '<ButtonPress-1>', kustuta_tekst)
 Voldemar = ttk.Label(raam, text = 'Voldemar.py ©®', anchor = 'e')
 Voldemar.grid(column = 1, row = 1)
 
@@ -100,6 +106,7 @@ logo.place(x=0, y=260)
 logopilt = PhotoImage(file='logo.gif')
 logo['image'] = logopilt
 raam.mainloop()
+
 
 
 
