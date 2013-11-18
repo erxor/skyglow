@@ -1,5 +1,8 @@
 #compose tweet halliks(lebo), kastile vajutades kaob see ära ja kiri muutub mustaks,
 #username ja muud asjad paika, kasti sisse twiitidele eraldi kastid äkki? modi akna suurust
+#siisselogimise kontroll
+#voldemari enda font
+#twiitide pikkus
 from tkinter import *
 from tkinter import ttk
 from twitter import *
@@ -8,11 +11,36 @@ from os.path import isfile
 def säutsumine():
     twitter.statuses.update(status=twiidikast.get('1.0',END))
     twiidikast.delete('1.0', END)
-    twiidikast.insert('1.0', 'Sisesta siia oma twiit')
+    twiidikast.insert('1.0', 'Sisesta siia oma twiit...')
 
 def twiit(a,b,c):
     twiit = ttk.Label(raam, wraplength = 290,text = a)
     twiit.place(x = b, y = c)
+
+def get_tweets():
+    c = 50
+    i = 0
+    statuses = twitter.statuses.home_timeline()
+    for a in range(0,5):
+        x = statuses[a]
+        tweet = x['text'] #krabame dictist teksti
+        user = (x['user'])['screen_name'] #krabame dicti subdictist username
+        name = (x['user'])['name'] #lisaks usernamele võtaks silmale meeldivama nime ka
+        b = 320
+        twiit(i*"\n"+name+'   '+"@"+user+"\n"+tweet+'\n', b, c) #prindime välja
+        i = 1
+        c += 60
+        
+def delete_tweets():
+    c = 50
+    for a in range(0,5):
+        b= 320
+        twiit("\n"+" "+140*" "+"\n"+140*" "+'\n',b, c)
+        c += 60
+        
+def replace_tweets():
+    delete_tweets()
+    get_tweets()
     
 #loob akna
 raam = Tk()
@@ -28,34 +56,12 @@ if not isfile(kasutajanimi+'.txt'): #kui vastavat faili veel pole siis loob sell
 f=open(kasutajanimi+'.txt') #avab faili ja võtab sealt oauth info
 oauth_token = f.readline().strip()
 oauth_secret = f.readline().strip()
-f.close()  #fail kinni
+f.close()
 twitter = Twitter(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_SECRET)) #logib twitterisse
 
-def get_tweets():
-    c = 50
-    i = 0
-    statuses = twitter.statuses.home_timeline()
-    for a in range(0,5):
-        x = statuses[a]
-        tweet = x['text'] #krabame dictist teksti
-        user = (x['user'])['screen_name'] #krabame dicti subdictist username
-        name = (x['user'])['name'] #lisaks usernamele võtaks silmale meeldivama nime ka
-        b = 320
-        twiit(i*"\n"+"@"+user+"\n"+tweet+'\n', b, c) #prindime välja
-        i = 1
-        c += 60
+
 get_tweets()
 
-def delete_tweets():
-    c = 50
-    for a in range(0,5):
-        b= 320
-        twiit("\n"+" "+140*" "+"\n"+140*" "+'\n',b, c)
-        c += 60
-
-def replace_tweets():
-    delete_tweets()
-    get_tweets()
 
 #loob nupud
 nupp1 = ttk.Button(raam, text="Home", command = replace_tweets)
@@ -72,7 +78,7 @@ nupp5.grid(column=1, row=6, pady=5, sticky = (E))
 #säutsu sisestamine, uuri ttk.Text
 twiidikast = Text(raam, width=30, height=5, wrap = 'word')
 twiidikast.grid(column=1, row = 5)
-twiidikast.insert('1.0','Sisesta siia oma tweet')
+twiidikast.insert('1.0','Sisesta siia oma tweet...')
 Voldemar = ttk.Label(raam, text = 'Voldemar.py ©®', anchor = 'e')
 Voldemar.grid(column = 1, row = 1)
 
