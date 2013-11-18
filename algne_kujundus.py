@@ -12,6 +12,7 @@ def säutsumine():
     twitter.statuses.update(status=twiidikast.get('1.0',END))
     twiidikast.delete('1.0', END)
     twiidikast.insert('1.0', 'Sisesta siia oma twiit...')
+    twiidikast.tag_add('vajutus', '1.0', 'end')
 
 def kustuta_tekst(n):
     twiidikast.delete('1.0', END)
