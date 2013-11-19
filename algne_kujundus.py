@@ -12,7 +12,7 @@ def säutsumine():
     twitter.statuses.update(status=twiidikast.get('1.0',END))
     twiidikast.delete('1.0', END)
     twiidikast.insert('1.0', 'Sisesta siia oma twiit...')
-    twiidikast.tag_add('vajutus', '1.0', 'end')
+    twiidikast.tag_add('hall tekst', '1.0', 'end')
 
 def kustuta_tekst(n):
     twiidikast.delete('1.0', END)
@@ -83,9 +83,9 @@ nupp5.grid(column=1, row=6, pady=5, sticky = (E))
 twiidikast = Text(raam, width=30, height=5, wrap = 'word')
 twiidikast.grid(column=1, row = 5)
 twiidikast.insert('1.0','Sisesta siia oma tweet...')
-twiidikast.tag_add('vajutus', '1.0', 'end')#muudame vajutusel teksti mustaks
-twiidikast.tag_configure('vajutus', foreground = 'gray')
-twiidikast.tag_bind('vajutus', '<ButtonPress-1>', kustuta_tekst)
+twiidikast.bind('<1>', kustuta_tekst)#vasak klikk kustutab kogu teksti
+twiidikast.tag_add('hall tekst', '1.0', 'end')#muudame teksti halliks
+twiidikast.tag_configure('hall tekst', foreground = 'gray')
 Voldemar = ttk.Label(raam, text = 'Voldemar.py ©®', anchor = 'e')
 Voldemar.grid(column = 1, row = 1)
 
