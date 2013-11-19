@@ -1,4 +1,4 @@
-#compose tweet halliks(lebo), kastile vajutades kaob see ära ja kiri muutub mustaks,
+#algul üks rida ja pärast 5 rida
 #username ja muud asjad paika, kasti sisse twiitidele eraldi kastid äkki? modi akna suurust
 #siisselogimise kontroll
 #voldemari enda font
@@ -83,14 +83,14 @@ nupp5.grid(column=1, row=6, pady=5, sticky = (E))
 twiidikast = Text(raam, width=30, height=5, wrap = 'word')
 twiidikast.grid(column=1, row = 5)
 twiidikast.insert('1.0','Sisesta siia oma tweet...')
-twiidikast.bind('<1>', kustuta_tekst)#vasak klikk kustutab kogu teksti
-twiidikast.tag_add('hall tekst', '1.0', 'end')#muudame teksti halliks
+twiidikast.bind('<1>', kustuta_tekst)
+twiidikast.tag_add('hall tekst', '1.0', 'end')#muudame vajutusel teksti mustaks, selleks loome tagi, töötab vaid teksti peale vajutades :S
 twiidikast.tag_configure('hall tekst', foreground = 'gray')
 Voldemar = ttk.Label(raam, text = 'Voldemar.py ©®', anchor = 'e')
 Voldemar.grid(column = 1, row = 1)
 
 #loob teksti
-username = ttk.Label(raam, text = 'User name')
+username = ttk.Label(raam, text = kasutajanimi)
 username.grid(column = 2, row = 14, sticky = (W))
 tweets = ttk.Label(raam, text = 'X tweets....')#sticky = (E) ei tööta siin ja anchor = 'w' ei muuda midagi
 tweets.grid(column = 2, row = 15, sticky = (W))
@@ -107,7 +107,3 @@ logo.place(x=0, y=260)
 logopilt = PhotoImage(file='logo.gif')
 logo['image'] = logopilt
 raam.mainloop()
-
-
-
-
