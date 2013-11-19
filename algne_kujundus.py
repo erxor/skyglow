@@ -1,4 +1,3 @@
-#algul üks rida ja pärast 5 rida
 #username ja muud asjad paika? modi akna suurust
 #sisselogimise kontroll
 #voldemari enda font
@@ -18,6 +17,7 @@ def säutsumine():
 
 def kustuta_tekst(lambimuutuja):
     twiidikast.delete('1.0', END)
+    twiidikast.configure(height = 5)
 
 def twiit(a,b,c):
     twiit = ttk.Label(raam, wraplength = 290,text = a)
@@ -80,11 +80,11 @@ nupp5 = ttk.Button(raam, text="Säutsu", command = säutsumine)
 nupp5.grid(column=1, row=6, pady=5, sticky = (E))
 
 #säutsu sisestamine, uuri ttk.Text
-twiidikast = Text(raam, width=30, height=5, wrap = 'word')
+twiidikast = Text(raam, width=30, height=1, wrap = 'word')
 twiidikast.grid(column=1, row = 5)
 twiidikast.insert('1.0','Sisesta siia oma tweet...')
 twiidikast.bind('<1>', kustuta_tekst)
-twiidikast.tag_add('hall tekst', '1.0', 'end')#muudame vajutusel teksti mustaks, selleks loome tagi, töötab vaid teksti peale vajutades :S
+twiidikast.tag_add('hall tekst', '1.0', 'end')#algul tekst hall
 twiidikast.tag_configure('hall tekst', foreground = 'gray')
 Voldemar = ttk.Label(raam, text = 'Voldemar.py ©®', anchor = 'e')
 Voldemar.grid(column = 1, row = 1)
