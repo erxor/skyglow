@@ -1,20 +1,22 @@
 #algul üks rida ja pärast 5 rida
-#username ja muud asjad paika, kasti sisse twiitidele eraldi kastid äkki? modi akna suurust
-#siisselogimise kontroll
+#username ja muud asjad paika? modi akna suurust
+#sisselogimise kontroll
 #voldemari enda font
 #twiitide pikkus
+#hyperlinkide avamine
+#s = ttk.Separator(parent, orient=HORIZONTAL)
 from tkinter import *
 from tkinter import ttk
 from twitter import *
 from os.path import isfile
 
 def säutsumine():
-    twitter.statuses.update(status=twiidikast.get('1.0',END))
+    #twitter.statuses.update(status=twiidikast.get('1.0',END))
     twiidikast.delete('1.0', END)
-    twiidikast.insert('1.0', 'Sisesta siia oma twiit...')
+    twiidikast.insert('1.0', 'Sisesta siia oma tweet...')
     twiidikast.tag_add('hall tekst', '1.0', 'end')
 
-def kustuta_tekst(n):
+def kustuta_tekst(lambimuutuja):
     twiidikast.delete('1.0', END)
 
 def twiit(a,b,c):
@@ -45,16 +47,16 @@ def delete_tweets():
 def replace_tweets():
     delete_tweets()
     get_tweets()
-    
+
+
 #loob akna
 raam = Tk()
 raam.title("Voldemar")
 raam.geometry("620x420")
 
-
 CONSUMER_KEY = "OyremhLVargLoqBAG2PZwQ" #voldemari consumer key
 CONSUMER_SECRET = "25GrCT1ItNRnHmMQc4QRD1qUpm8jvY1HTzsaYHqLCBE" #voldemari consumer secret
-kasutajanimi = "E_R_K_I" #kasutajanimi
+kasutajanimi = "MadisKarli" #kasutajanimi
 if not isfile(kasutajanimi+'.txt'): #kui vastavat faili veel pole siis loob selle
     oauth_dance('voldemar', 'OyremhLVargLoqBAG2PZwQ', '25GrCT1ItNRnHmMQc4QRD1qUpm8jvY1HTzsaYHqLCBE',kasutajanimi+'.txt')
 f=open(kasutajanimi+'.txt') #avab faili ja võtab sealt oauth info
@@ -63,9 +65,7 @@ oauth_secret = f.readline().strip()
 f.close()
 twitter = Twitter(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_SECRET)) #logib twitterisse
 
-
 get_tweets()
-
 
 #loob nupud
 nupp1 = ttk.Button(raam, text="Home", command = replace_tweets)
@@ -107,3 +107,4 @@ logo.place(x=0, y=260)
 logopilt = PhotoImage(file='logo.gif')
 logo['image'] = logopilt
 raam.mainloop()
+
