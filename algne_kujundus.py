@@ -25,7 +25,6 @@ def twiit(a,b,c):
 
 def get_tweets_mina():
     c = 50
-    i = 0
     statuses = twitter.statuses.user_timeline()
     for a in range(0,5):
         x = statuses[a]
@@ -33,13 +32,11 @@ def get_tweets_mina():
         user = (x['user'])['screen_name']
         name = (x['user'])['name']
         b = 320
-        twiit(i*"\n"+name+'   '+"@"+user+"\n"+tweet+'\n', b, c)
-        i = 1
+        twiit(name+'   '+"@"+user+"\n"+tweet+'\n'*2, b, c)
         c += 70
 
 def get_tweets():
     c = 50
-    i = 0
     statuses = twitter.statuses.home_timeline()
     for a in range(0,5):
         x = statuses[a]
@@ -47,13 +44,11 @@ def get_tweets():
         user = (x['user'])['screen_name'] #krabame dicti subdictist username
         name = (x['user'])['name'] #lisaks usernamele võtaks silmale meeldivama nime ka
         b = 320
-        twiit(i*"\n"+name+'   '+"@"+user+"\n"+tweet+'\n'*2, b, c) #prindime välja
-        i = 0
+        twiit(name+'   '+"@"+user+"\n"+tweet+'\n'*2, b, c) #prindime välja
         c += 70
 
 def get_mentions():
     c = 50
-    i = 0
     statuses = twitter.statuses.mentions_timeline()
     for a in range(0,5):
         x = statuses[a]
@@ -61,8 +56,7 @@ def get_mentions():
         user = (x['user'])['screen_name']
         name = (x['user'])['name']
         b = 320
-        twiit(i*"\n"+name+'   '+"@"+user+"\n"+tweet+'\n', b, c)
-        i = 1
+        twiit(name+'   '+"@"+user+"\n"+tweet+'\n'*2, b, c)
         c += 70
                 
         
