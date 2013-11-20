@@ -23,6 +23,20 @@ def twiit(a,b,c):
     twiit = ttk.Label(raam, wraplength = 290,text = a)
     twiit.place(x = b, y = c)
 
+def get_tweets_mina():
+    c = 50
+    i = 0
+    statuses = twitter.statuses.user_timeline()
+    for a in range(0,5):
+        x = statuses[a]
+        tweet = x['text']
+        user = (x['user'])['screen_name']
+        name = (x['user'])['name']
+        b = 320
+        twiit(i*"\n"+name+'   '+"@"+user+"\n"+tweet+'\n', b, c)
+        i = 1
+        c += 60
+
 def get_tweets():
     c = 50
     i = 0
@@ -67,6 +81,9 @@ def replace_mentions():
     delete_tweets()
     get_mentions()
 
+def replace_tweets_mina():
+    delete_tweets()
+    get_tweets_mina()
 
 #loob akna
 raam = Tk()
@@ -75,7 +92,7 @@ raam.geometry("620x420")
 
 CONSUMER_KEY = "OyremhLVargLoqBAG2PZwQ" #voldemari consumer key
 CONSUMER_SECRET = "25GrCT1ItNRnHmMQc4QRD1qUpm8jvY1HTzsaYHqLCBE" #voldemari consumer secret
-kasutajanimi = "E_R_K_I" #kasutajanimi
+kasutajanimi = "erx0r" #kasutajanimi
 if not isfile(kasutajanimi+'.txt'): #kui vastavat faili veel pole siis loob selle
     oauth_dance('voldemar', 'OyremhLVargLoqBAG2PZwQ', '25GrCT1ItNRnHmMQc4QRD1qUpm8jvY1HTzsaYHqLCBE',kasutajanimi+'.txt')
 f=open(kasutajanimi+'.txt') #avab faili ja võtab sealt oauth info
@@ -91,7 +108,7 @@ nupp1 = ttk.Button(raam, text="Home", command = replace_tweets)
 nupp1.grid(column=3, row=1, pady=5)
 nupp2 = ttk.Button(raam, text="@", command = replace_mentions)
 nupp2.grid(column=4, row=1, pady=5)
-nupp3 = ttk.Button(raam, text="Trending")
+nupp3 = ttk.Button(raam, text="Me", command = replace_tweets_mina)
 nupp3.grid(column=5, row=1, pady=5 )
 nupp4 = ttk.Button(raam, text="Messages")
 nupp4.grid(column=6, row=1, pady=5)
