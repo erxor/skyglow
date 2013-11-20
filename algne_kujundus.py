@@ -20,7 +20,7 @@ def kustuta_tekst(lambimuutuja):
     twiidikast.configure(height = 5)
 
 def twiit(a,b,c):
-    twiit = ttk.Label(raam, wraplength = 290,text = a)
+    twiit = ttk.Label(raam, wraplength = 310,text = a)
     twiit.place(x = b, y = c)
 
 def get_tweets_mina():
@@ -35,7 +35,7 @@ def get_tweets_mina():
         b = 320
         twiit(i*"\n"+name+'   '+"@"+user+"\n"+tweet+'\n', b, c)
         i = 1
-        c += 60
+        c += 70
 
 def get_tweets():
     c = 50
@@ -49,7 +49,7 @@ def get_tweets():
         b = 320
         twiit(i*"\n"+name+'   '+"@"+user+"\n"+tweet+'\n', b, c) #prindime välja
         i = 1
-        c += 60
+        c += 70
 
 def get_mentions():
     c = 50
@@ -63,7 +63,7 @@ def get_mentions():
         b = 320
         twiit(i*"\n"+name+'   '+"@"+user+"\n"+tweet+'\n', b, c)
         i = 1
-        c += 60
+        c += 70
                 
         
 def delete_tweets():
@@ -71,7 +71,7 @@ def delete_tweets():
     for a in range(0,5):
         b= 320
         twiit("\n"+" "+140*" "+"\n"+140*" "+'\n',b, c)
-        c += 60
+        c += 70
         
 def replace_tweets():
     delete_tweets()
@@ -88,7 +88,7 @@ def replace_tweets_mina():
 #loob akna
 raam = Tk()
 raam.title("Voldemar")
-raam.geometry("620x420")
+raam.geometry("630x400")
 
 CONSUMER_KEY = "OyremhLVargLoqBAG2PZwQ" #voldemari consumer key
 CONSUMER_SECRET = "25GrCT1ItNRnHmMQc4QRD1qUpm8jvY1HTzsaYHqLCBE" #voldemari consumer secret
@@ -128,20 +128,15 @@ Voldemar = ttk.Label(raam, text = 'Voldemar.py ©®', anchor = 'e')
 Voldemar.grid(column = 1, row = 1)
 
 #loob teksti
-username = ttk.Label(raam, text = kasutajanimi)
-username.grid(column = 1, row = 14, sticky = (W))
-tweets = ttk.Label(raam, text = 'X tweets....')#sticky = (E) ei tööta siin ja anchor = 'w' ei muuda midagi
-tweets.grid(column = 1, row = 15, sticky = (W))
-following = ttk.Label(raam, text = 'Y following')
-following.grid(column = 1, row = 16, sticky = (W))
-followers = ttk.Label(raam, text = 'Z followers')
-followers.grid(column = 1, row = 17, sticky = (W))
+username = ttk.Label(raam, text = 'Tere, '+kasutajanimi+ '!')
+username.place(x = 0, y = 220)
+
 space = ttk.Label(raam, text = '')
 space.grid(column = 1, row = 13, sticky = (E))
 
 #logo osa, jpg ja png ei tööta miskipärast
 logo = ttk.Label(raam)
-logo.place(x=0, y=260)
+logo.place(x=0, y=240)
 logopilt = PhotoImage(file='logo.gif')
 logo['image'] = logopilt
 raam.mainloop()
