@@ -104,6 +104,8 @@ twitter = Twitter(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_S
 get_tweets()
 
 #loob nupud
+nupp0 = ttk.Label(raam, text = '                        ')
+nupp0.grid (column = 2, row=1)
 nupp1 = ttk.Button(raam, text="Home", command = replace_tweets)
 nupp1.grid(column=3, row=1, pady=5)
 nupp2 = ttk.Button(raam, text="@", command = replace_mentions)
@@ -127,13 +129,13 @@ Voldemar.grid(column = 1, row = 1)
 
 #loob teksti
 username = ttk.Label(raam, text = kasutajanimi)
-username.grid(column = 2, row = 14, sticky = (W))
+username.grid(column = 1, row = 14, sticky = (W))
 tweets = ttk.Label(raam, text = 'X tweets....')#sticky = (E) ei tööta siin ja anchor = 'w' ei muuda midagi
-tweets.grid(column = 2, row = 15, sticky = (W))
+tweets.grid(column = 1, row = 15, sticky = (W))
 following = ttk.Label(raam, text = 'Y following')
-following.grid(column = 2, row = 16, sticky = (W))
+following.grid(column = 1, row = 16, sticky = (W))
 followers = ttk.Label(raam, text = 'Z followers')
-followers.grid(column = 2, row = 17, sticky = (W))
+followers.grid(column = 1, row = 17, sticky = (W))
 space = ttk.Label(raam, text = '')
 space.grid(column = 1, row = 13, sticky = (E))
 
@@ -143,4 +145,3 @@ logo.place(x=0, y=260)
 logopilt = PhotoImage(file='logo.gif')
 logo['image'] = logopilt
 raam.mainloop()
-
