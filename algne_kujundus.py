@@ -1,9 +1,6 @@
-#username ja muud asjad paika? modi akna suurust
 #sisselogimise kontroll
-#voldemari enda font
 #twiitide pikkus
 #hyperlinkide avamine
-#s = ttk.Separator(parent, orient=HORIZONTAL)
 from tkinter import *
 from tkinter import ttk
 from twitter import *
@@ -84,6 +81,7 @@ raam = Tk()
 raam.title("Voldemar")
 raam.geometry("630x400")
 raam.option_add("*Font", ("Palatino Linotype, Book Antiqua", 10))#font
+#raam.resizable(width=FALSE, height=FALSE) #ei lase akna suurust muuta
 
 CONSUMER_KEY = "OyremhLVargLoqBAG2PZwQ" #voldemari consumer key
 CONSUMER_SECRET = "25GrCT1ItNRnHmMQc4QRD1qUpm8jvY1HTzsaYHqLCBE" #voldemari consumer secret
