@@ -47,8 +47,8 @@ def get_tweets():
         user = (x['user'])['screen_name'] #krabame dicti subdictist username
         name = (x['user'])['name'] #lisaks usernamele võtaks silmale meeldivama nime ka
         b = 320
-        twiit(i*"\n"+name+'   '+"@"+user+"\n"+tweet+'\n', b, c) #prindime välja
-        i = 1
+        twiit(i*"\n"+name+'   '+"@"+user+"\n"+tweet+'\n'*2, b, c) #prindime välja
+        i = 0
         c += 70
 
 def get_mentions():
