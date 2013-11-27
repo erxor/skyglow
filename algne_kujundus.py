@@ -26,7 +26,6 @@ def twiit(a,b,c):
 
 def get_tweets_mina():
     c = 50
-    i = 0
     statuses = twitter.statuses.user_timeline()
     for a in range(0,5):
         x = statuses[a]
@@ -39,7 +38,6 @@ def get_tweets_mina():
 
 def get_tweets():
     c = 50
-    i = 0
     statuses = twitter.statuses.home_timeline()
     for a in range(0,5):
         x = statuses[a]
@@ -52,7 +50,6 @@ def get_tweets():
 
 def get_mentions():
     c = 50
-    i = 0
     statuses = twitter.statuses.mentions_timeline()
     for a in range(0,5):
         x = statuses[a]
@@ -137,6 +134,9 @@ username = ttk.Label(raam, text = 'Tere, '+kasutajanimi+ '!')
 username.configure(background = color1, foreground = "white")
 username.place(x = 0, y = 220)
 
+##space = ttk.Label(raam, text = '')
+##Voldemar.configure(background = color1, foreground = "white")
+##space.grid(column = 1, row = 13, sticky = (E))
 
 #logo osa, jpg ja png ei tööta miskipärast
 logo = ttk.Label(raam)
