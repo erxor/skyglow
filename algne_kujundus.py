@@ -83,7 +83,7 @@ def replace_tweets_mina():
 color1 = '#0B3A58'
 #loob akna
 raam = Tk()
-raam.title("Voldemar")
+raam.title("Skyglow")
 raam.geometry("630x400")
 raam.configure(background = color1)
 raam.option_add("*Font", ("Segoe UI", 10))#font
@@ -92,7 +92,7 @@ raam.resizable(width=FALSE, height=FALSE)
 
 CONSUMER_KEY = "OyremhLVargLoqBAG2PZwQ" #voldemari consumer key
 CONSUMER_SECRET = "25GrCT1ItNRnHmMQc4QRD1qUpm8jvY1HTzsaYHqLCBE" #voldemari consumer secret
-kasutajanimi = "MadisKarli" #kasutajanimi
+kasutajanimi = "erx0r" #kasutajanimi
 if not isfile(kasutajanimi+'.txt'): #kui vastavat faili veel pole siis loob selle
     oauth_dance('voldemar', 'OyremhLVargLoqBAG2PZwQ', '25GrCT1ItNRnHmMQc4QRD1qUpm8jvY1HTzsaYHqLCBE',kasutajanimi+'.txt')
 f=open(kasutajanimi+'.txt') #avab faili ja võtab sealt oauth info
@@ -125,7 +125,7 @@ twiidikast.insert('1.0','Sisesta siia oma tweet...')
 twiidikast.bind('<1>', kustuta_tekst)
 twiidikast.tag_add('hall tekst', '1.0', 'end')#algul tekst hall
 twiidikast.tag_configure('hall tekst', foreground = 'gray')
-Voldemar = ttk.Label(raam, text = 'Voldemar.py ©®', anchor = 'e')
+Voldemar = ttk.Label(raam, text = 'Skyglow ©®', anchor = 'e')
 Voldemar.configure(background = color1, foreground = "white")
 Voldemar.grid(column = 1, row = 1)
 
