@@ -25,7 +25,7 @@ def twiit(a,b,c):
     twiit.place(x = b, y = c)
 
 def get_tweets_mina():
-    c = 50
+    c = 25
     statuses = twitter.statuses.user_timeline()
     for a in range(0,5):
         x = statuses[a]
@@ -37,7 +37,7 @@ def get_tweets_mina():
         c += 70
 
 def get_tweets():
-    c = 50
+    c = 25
     statuses = twitter.statuses.home_timeline()
     for a in range(0,5):
         x = statuses[a]
@@ -49,7 +49,7 @@ def get_tweets():
         c += 70
 
 def get_mentions():
-    c = 50
+    c = 25
     statuses = twitter.statuses.mentions_timeline()
     for a in range(0,5):
         x = statuses[a]
@@ -62,7 +62,7 @@ def get_mentions():
                 
         
 def delete_tweets():
-    c = 50
+    c = 25
     for a in range(0,5):
         b= 320
         twiit("\n"+" "+140*" "+"\n"+140*" "+'\n',b, c)
@@ -125,9 +125,9 @@ twiidikast.insert('1.0','Sisesta siia oma tweet...')
 twiidikast.bind('<1>', kustuta_tekst)
 twiidikast.tag_add('hall tekst', '1.0', 'end')#algul tekst hall
 twiidikast.tag_configure('hall tekst', foreground = 'gray')
-Voldemar = ttk.Label(raam, text = 'Skyglow ©®', anchor = 'e')
-Voldemar.configure(background = color1, foreground = "white")
-Voldemar.grid(column = 1, row = 1)
+Skyglow = ttk.Label(raam, text = 'Skyglow ©®', anchor = 'e')
+Skyglow.configure(background = color1, foreground = "white")
+Skyglow.grid(column = 1, row = 1)
 
 #loob teksti
 username = ttk.Label(raam, text = 'Tere, '+kasutajanimi+ '!')
