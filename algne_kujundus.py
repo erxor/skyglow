@@ -8,13 +8,31 @@ from twitter import *
 from os.path import isfile
 from tkinter import font
 
-
+def validateTextInputSize(event):
+    arv = (140-(len(twiidikast.get('1.0',END))-1))
+    if arv > 99:
+        loendur = ttk.Label(raam, text = arv, anchor = 'e')
+        loendur.configure(background = color1, foreground = "white")
+        loendur.grid(column = 1, row = 6)
+    elif arv < 100:
+        if arv > -1:
+            loendur = ttk.Label(raam, text = ' '+str(arv), anchor = 'e')
+            loendur.configure(background = color1, foreground = "white")
+            loendur.grid(column = 1, row = 6)
+        elif arv < 0:
+            loendur = ttk.Label(raam, text = ' '+str(arv), anchor = 'e')
+            loendur.configure(background = color1, foreground = "red")
+            loendur.grid(column = 1, row = 6)
+    
 def säutsumine():
-    twitter.statuses.update(status=twiidikast.get('1.0',END))
-    twiidikast.delete('1.0', END)
-    twiidikast.insert('1.0', 'Sisesta siia oma tweet...')
-    twiidikast.tag_add('hall tekst', '1.0', 'end')
-
+    if len(twiidikast.get('1.0',END))-1 >140:
+        pass
+    else:
+         twitter.statuses.update(status=twiidikast.get('1.0',END))
+         twiidikast.delete('1.0', END)
+         twiidikast.insert('1.0', 'Sisesta siia oma tweet...')
+         twiidikast.tag_add('hall tekst', '1.0', 'end')
+     
 def kustuta_tekst(lambimuutuja):
     twiidikast.delete('1.0', END)
     twiidikast.configure(height = 5)
@@ -123,6 +141,7 @@ twiidikast = Text(raam, width=30, height=1, wrap = 'word')
 twiidikast.grid(column=1, row = 5)
 twiidikast.insert('1.0','Sisesta siia oma tweet...')
 twiidikast.bind('<1>', kustuta_tekst)
+twiidikast.bind("<KeyRelease>", validateTextInputSize)
 twiidikast.tag_add('hall tekst', '1.0', 'end')#algul tekst hall
 twiidikast.tag_configure('hall tekst', foreground = 'gray')
 Skyglow = ttk.Label(raam, text = 'Skyglow ©®', anchor = 'e')
