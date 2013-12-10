@@ -103,10 +103,10 @@ paksFont = ("Times", 20, "bold")
 #raam.resizable(width=FALSE, height=FALSE)
 
 #loome taustapildi
-##taustapilt = ttk.Label(raam)
-##taustapilt.place(x=0, y=0)
-##taust = PhotoImage(file='taust.gif')
-##taustapilt['image'] = taust
+taustapilt = ttk.Label(raam)
+taustapilt.place(x=0, y=0)
+taust = PhotoImage(file='taust.gif')
+taustapilt['image'] = taust
 
 ###loome scrollbari ja twiidiala
 twiidiala = Canvas(raam, width = 304, height = 375)
@@ -171,14 +171,6 @@ twiidiylemine.grid(column=1, row = 5)
 twiidiylemine_pilt = PhotoImage(file="raam_ylemine.gif")
 twiidiylemine['image'] = twiidiylemine_pilt
 
-Skyglow = Label(raam, text = 'Skyglow ©®', anchor = 'e')
-Skyglow.configure(background = color1, foreground = "white")
-Skyglow.grid(column = 1, row = 1)
-
-#tervitab kasutajat
-username = ttk.Label(raam, text = 'Tere, '+kasutajanimi+ '!')
-username.configure(background = color1, foreground = "white")
-username.place(x = 0, y = 220)
 
 #logo osa
 logo = ttk.Label(raam)
