@@ -47,7 +47,7 @@ def parem_twiit(name, user, tweet, yasukoht):
              tweet = tweet[0]+'\n'+tweet[1]+'\n'+tweet[2]
         elif len(tweet) == 4:
              tweet = tweet[0]+'\n'+tweet[1]+'\n'+tweet[2]+'\n'+tweet[3]
-        twiidiala.create_text(0,yasukoht, text = (name+'   '+"@"+user+"\n"+tweet+'\n'), anchor = 'w', font =("Segoe UI", 8), fill = "white")
+        twiidiala.create_text(2,yasukoht, text = (name+'   '+"@"+user+"\n"+tweet+'\n'), anchor = 'w', font =("Segoe UI", 8), fill = "white")
 
 def get_tweets_mina():
     c = 40
@@ -97,27 +97,32 @@ color1 = '#0B3A58'
 raam = Tk()
 raam.title("Skyglow")
 raam.geometry("618x400")
-raam.configure(background = color1)
 raam.option_add("*Font", ("Segoe UI", 10))#font
 paksFont = ("Times", 20, "bold")
 #raam.resizable(width=FALSE, height=FALSE)
 
 #loome taustapildi
-taustapilt = ttk.Label(raam)
+taustapilt = Label(raam)
 taustapilt.place(x=0, y=0)
 taust = PhotoImage(file='taust.gif')
 taustapilt['image'] = taust
-taustapilt.config(background = color1)
-
+taustapilt.config(padx=0, pady=0, bd=-2)
 
 ###loome scrollbari ja twiidiala
 twiidiala = Canvas(raam, width = 304, height = 375)
+twiidialataust = Label(twiidiala)
+twiidialataust.place(x=0,y=0)
+twiidialataust.config(bd=-2, padx = 0, pady=0)
+twiidialataust_pilt = PhotoImage(file = "twiitidetaust.gif")
+twiidialataust['image']=twiidialataust_pilt
+twiidialataust.lower()
 scrollbar = ttk.Scrollbar(twiidiala)
 twiidiala.configure(yscrollcommand = scrollbar.set, scrollregion = (0,0,320,800), highlightthickness = 0)
 twiidiala.configure(bg = color1)
 twiidiala.place(x = 316, y = 25)
 scrollbar.place(x = 285, y = 0, height = 375)
 scrollbar.configure(command=twiidiala.yview)
+
 
 CONSUMER_KEY = "OyremhLVargLoqBAG2PZwQ" #voldemari consumer key
 CONSUMER_SECRET = "25GrCT1ItNRnHmMQc4QRD1qUpm8jvY1HTzsaYHqLCBE" #voldemari consumer secret
@@ -129,13 +134,20 @@ oauth_token = f.readline().strip()
 oauth_secret = f.readline().strip()
 f.close()
 twitter = Twitter(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_SECRET)) #logib twitterisse
+#twiitide taustad
+##twitterbox1 = Label(twiidiala)
+##twitterbox1.place(x=0, y=0)
+##twitterbox1_pilt = PhotoImage(file="tweet1.gif")
+##twitterbox1['image'] = twitterbox1_pilt
+##twitterbox1.config(bd=-2, padx = 0, pady=0)
 
 #get_tweets()
-twitterbox4 = ttk.Label(raam)
+twitterbox4 = Label(raam)
 twitterbox4.place(x=316, y=0)
 twitterbox4_pilt = PhotoImage(file="twitterbox4aylemine.gif")
 twitterbox4['image'] = twitterbox4_pilt
-twitterbox4.config(background=color1)
+twitterbox4.config(bd=-2, padx = 0, pady=0)
+
 #loob nupud
 nupp0 = ttk.Label(raam, text = '                        ')
 nupp0.grid (column = 2, row=1)
@@ -152,7 +164,7 @@ nupp4.grid(column=6, row=1)
 nupp5 = ttk.Button(raam, text="Säutsu", command = säutsumine)
 nupp5.grid(column=1, row=8, pady=5, sticky = (E))
 
-#säutsu sisestamine, uuri ttk.Text
+#säutsu sisestamine
 twiidikast = Text(raam, width=30, height=1, wrap = 'word')
 twiidikast.grid(column=1, row = 6)
 twiidikast.insert('1.0','Sisesta siia oma tweet...')
@@ -161,24 +173,25 @@ twiidikast.bind("<KeyRelease>", validateTextInputSize)
 twiidikast.tag_add('hall tekst', '1.0', 'end')#algul tekst hall
 twiidikast.tag_configure('hall tekst', foreground = 'gray')
 
-#kasi alus ja ülemine osa
-twiidialus = ttk.Label(raam)
+
+#kasti alus ja ülemine osa
+twiidialus = Label(raam)
 twiidialus.grid(column=1, row = 7)
-twiidialus.config(borderwidth = 0)
+twiidialus.config(bd=-2, padx = 0, pady=0)
 twiidialus_pilt = PhotoImage(file="raam_alus.gif")
 twiidialus['image'] = twiidialus_pilt
-twiidialus.config(background = color1)
 
-twiidiylemine = ttk.Label(raam)
+twiidiylemine = Label(raam)
 twiidiylemine.grid(column=1, row = 5)
 twiidiylemine_pilt = PhotoImage(file="raam_ylemine.gif")
 twiidiylemine['image'] = twiidiylemine_pilt
-twiidiylemine.config(background = color1)
+twiidiylemine.config(bd=-2, padx = 0, pady=0)
 
 
 #logo osa
-logo = ttk.Label(raam)
-logo.place(x=0, y=240)
+logo = Label(raam)
+logo.place(x=0, y=243)
 logopilt = PhotoImage(file='logo.gif')
 logo['image'] = logopilt
+logo.config(bd=-2, padx = 0, pady=0)
 raam.mainloop()
