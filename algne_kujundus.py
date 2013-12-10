@@ -107,6 +107,8 @@ taustapilt = ttk.Label(raam)
 taustapilt.place(x=0, y=0)
 taust = PhotoImage(file='taust.gif')
 taustapilt['image'] = taust
+taustapilt.config(background = color1)
+
 
 ###loome scrollbari ja twiidiala
 twiidiala = Canvas(raam, width = 304, height = 375)
@@ -133,7 +135,7 @@ twitterbox4 = ttk.Label(raam)
 twitterbox4.place(x=316, y=0)
 twitterbox4_pilt = PhotoImage(file="twitterbox4aylemine.gif")
 twitterbox4['image'] = twitterbox4_pilt
-
+twitterbox4.config(background=color1)
 #loob nupud
 nupp0 = ttk.Label(raam, text = '                        ')
 nupp0.grid (column = 2, row=1)
