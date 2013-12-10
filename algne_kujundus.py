@@ -119,7 +119,7 @@ scrollbar.configure(command=twiidiala.yview)
 
 CONSUMER_KEY = "OyremhLVargLoqBAG2PZwQ" #voldemari consumer key
 CONSUMER_SECRET = "25GrCT1ItNRnHmMQc4QRD1qUpm8jvY1HTzsaYHqLCBE" #voldemari consumer secret
-kasutajanimi = "MadisKarli" #kasutajanimi
+kasutajanimi = "erx0r" #kasutajanimi
 if not isfile(kasutajanimi+'.txt'): #kui vastavat faili veel pole siis loob selle
     oauth_dance('voldemar', 'OyremhLVargLoqBAG2PZwQ', '25GrCT1ItNRnHmMQc4QRD1qUpm8jvY1HTzsaYHqLCBE',kasutajanimi+'.txt')
 f=open(kasutajanimi+'.txt') #avab faili ja võtab sealt oauth info
@@ -165,11 +165,13 @@ twiidialus.grid(column=1, row = 7)
 twiidialus.config(borderwidth = 0)
 twiidialus_pilt = PhotoImage(file="raam_alus.gif")
 twiidialus['image'] = twiidialus_pilt
+twiidialus.config(background = color1)
 
 twiidiylemine = ttk.Label(raam)
 twiidiylemine.grid(column=1, row = 5)
 twiidiylemine_pilt = PhotoImage(file="raam_ylemine.gif")
 twiidiylemine['image'] = twiidiylemine_pilt
+twiidiylemine.config(background = color1)
 
 
 #logo osa
