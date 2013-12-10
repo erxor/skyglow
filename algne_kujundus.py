@@ -38,11 +38,6 @@ def kustuta_tekst(event):
     twiidikast.delete('1.0', END)
     twiidikast.configure(height = 5)
 
-def twiit(a,b,c):
-    #twiit = ttk.Label(raam, wraplength = 310,text = a)
-    #twiit.configure(background = color1, foreground = "white")
-    #twiit.place(x = b, y = c)
-    b = c
 
 def parem_twiit(name, user, tweet, yasukoht):
         tweet = wrap(tweet, width = 50)
@@ -58,7 +53,9 @@ def parem_twiit(name, user, tweet, yasukoht):
 
 def get_tweets_mina():
     c = 40
-    twiidiala.delete(ALL)
+    twiidiala.delete(ALL)#teeme tahvli puhtaks
+    scrollbar.set(0.0, 0.43529411764705883)#liigutame scrollbari üles
+    twiidiala.yview('moveto', '0.0')#liigutame vaate üles
     statuses = twitter.statuses.user_timeline()
     for a in range(0,11):
         x = statuses[a]
@@ -70,19 +67,23 @@ def get_tweets_mina():
 
 def get_tweets():
     c = 30
-##    twiidiala.delete(ALL)
-##    statuses = twitter.statuses.home_timeline()
-##    for a in range(0,11):
-##        x = statuses[a]
-##        tweet = x['text'] #krabame dictist teksti
-##        user = (x['user'])['screen_name'] #krabame dicti subdictist username
-##        name = (x['user'])['name'] #lisaks usernamele võtaks silmale meeldivama nime ka
-##        parem_twiit(name, user, tweet, c)
-##        c += 70
+    twiidiala.delete(ALL)
+    scrollbar.set(0.0, 0.43529411764705883)
+    twiidiala.yview('moveto', '0.0')
+    statuses = twitter.statuses.home_timeline()
+    for a in range(0,11):
+        x = statuses[a]
+        tweet = x['text'] #krabame dictist teksti
+        user = (x['user'])['screen_name'] #krabame dicti subdictist username
+        name = (x['user'])['name'] #lisaks usernamele võtaks silmale meeldivama nime ka
+        parem_twiit(name, user, tweet, c)
+        c += 70
 
 def get_mentions():
     c = 30
-    twiidiala.delete(ALL)#teeme tahvli puhtaks
+    twiidiala.delete(ALL)
+    scrollbar.set(0.0, 0.43529411764705883)
+    twiidiala.yview('moveto', '0.0')
     statuses = twitter.statuses.mentions_timeline()
     for a in range(0,11):
         x = statuses[a]
@@ -93,25 +94,6 @@ def get_mentions():
         c += 70
                 
         
-def delete_tweets():
-    c = 25
-    for a in range(0,5):
-        b= 320
-        twiit("\n"+" "+140*" "+"\n"+140*" "+'\n',b, c)
-        c += 70
-        
-def replace_tweets():
-    delete_tweets()
-    get_tweets()
-
-def replace_mentions():
-    delete_tweets()
-    get_mentions()
-
-def replace_tweets_mina():
-    delete_tweets()
-    get_tweets_mina()
-
 color1 = '#0B3A58'
 #loob akna
 raam = Tk()
@@ -120,7 +102,7 @@ raam.geometry("630x400")
 raam.configure(background = color1)
 raam.option_add("*Font", ("Segoe UI", 10))#font
 paksFont = ("Times", 20, "bold")
-#raam.resizable(width=FALSE, height=FALSE)
+raam.resizable(width=FALSE, height=FALSE)
 
 ###loome scrollbari ja twiidiala
 twiidiala = Canvas(raam, width = 302, height = 370)
@@ -149,11 +131,11 @@ get_tweets()
 nupp0 = ttk.Label(raam, text = '                        ')
 nupp0.configure(background = color1, foreground = "white")
 nupp0.grid (column = 2, row=1)
-nupp1 = ttk.Button(raam, text="Home", command = replace_tweets)
+nupp1 = ttk.Button(raam, text="Home", command = get_tweets)
 nupp1.grid(column=3, row=1)
-nupp2 = ttk.Button(raam, text="@", command = replace_mentions)
+nupp2 = ttk.Button(raam, text="@", command = get_mentions)
 nupp2.grid(column=4, row=1)
-nupp3 = ttk.Button(raam, text="Me", command = replace_tweets_mina)
+nupp3 = ttk.Button(raam, text="Me", command = get_tweets_mina)
 nupp3.grid(column=5, row=1)
 nupp4 = ttk.Button(raam, text="    ")
 nupp4.grid(column=6, row=1)
