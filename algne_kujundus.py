@@ -45,20 +45,22 @@ def twiit(a,b,c):
     b = c
 
 def parem_twiit(name, user, tweet, yasukoht):
-        tweet = wrap(tweet, width = 68)
+        tweet = wrap(tweet, width = 50)
         if len(tweet) == 1:
              tweet = tweet[0]
         elif len(tweet) == 2:
              tweet = tweet[0]+'\n'+tweet[1]
         elif len(tweet) == 3:
              tweet = tweet[0]+'\n'+tweet[1]+'\n'+tweet[2]
-        twiidiala.create_text(0,yasukoht+5, text = (name+'   '+"@"+user+"\n"+tweet+'\n'), anchor = 'w', font =("Segoe UI", 8), fill = "white")
+        elif len(tweet) == 4:
+             tweet = tweet[0]+'\n'+tweet[1]+'\n'+tweet[2]+'\n'+tweet[3]
+        twiidiala.create_text(0,yasukoht, text = (name+'   '+"@"+user+"\n"+tweet+'\n'), anchor = 'w', font =("Segoe UI", 8), fill = "white")
 
 def get_tweets_mina():
-    c = 25
+    c = 40
     twiidiala.delete(ALL)
     statuses = twitter.statuses.user_timeline()
-    for a in range(0,12):
+    for a in range(0,11):
         x = statuses[a]
         tweet = x['text']
         user = (x['user'])['screen_name']
@@ -67,22 +69,22 @@ def get_tweets_mina():
         c += 70
 
 def get_tweets():
-    c = 25
-    twiidiala.delete(ALL)
-    statuses = twitter.statuses.home_timeline()
-    for a in range(0,11):
-        x = statuses[a]
-        tweet = x['text'] #krabame dictist teksti
-        user = (x['user'])['screen_name'] #krabame dicti subdictist username
-        name = (x['user'])['name'] #lisaks usernamele võtaks silmale meeldivama nime ka
-        parem_twiit(name, user, tweet, c)
-        c += 70
+    c = 30
+##    twiidiala.delete(ALL)
+##    statuses = twitter.statuses.home_timeline()
+##    for a in range(0,11):
+##        x = statuses[a]
+##        tweet = x['text'] #krabame dictist teksti
+##        user = (x['user'])['screen_name'] #krabame dicti subdictist username
+##        name = (x['user'])['name'] #lisaks usernamele võtaks silmale meeldivama nime ka
+##        parem_twiit(name, user, tweet, c)
+##        c += 70
 
 def get_mentions():
-    c = 25
+    c = 30
     twiidiala.delete(ALL)#teeme tahvli puhtaks
     statuses = twitter.statuses.mentions_timeline()
-    for a in range(0,12):
+    for a in range(0,11):
         x = statuses[a]
         tweet = x['text']
         user = (x['user'])['screen_name']
@@ -120,14 +122,14 @@ raam.option_add("*Font", ("Segoe UI", 10))#font
 paksFont = ("Times", 20, "bold")
 #raam.resizable(width=FALSE, height=FALSE)
 
-###loome scrollbari
-twiidiala = Canvas(raam, width = 380, height = 370)
+###loome scrollbari ja twiidiala
+twiidiala = Canvas(raam, width = 302, height = 370)
 scrollbar = ttk.Scrollbar(twiidiala)
-twiidiala.configure(yscrollcommand = scrollbar.set, scrollregion = (0,0,320,850), highlightthickness = 0)
+twiidiala.configure(yscrollcommand = scrollbar.set, scrollregion = (0,0,320,800), highlightthickness = 0)
 twiidiala.configure(bg = color1)
-twiidiala.place(x = 240, y = 24)
-scrollbar.place(x = 363, y = 0, height = 370)
-scrollbar.config(command=twiidiala.yview)
+twiidiala.place(x = 316, y = 30)
+scrollbar.place(x = 283, y = 0, height = 370)
+scrollbar.configure(command=twiidiala.yview)
 
 
 CONSUMER_KEY = "OyremhLVargLoqBAG2PZwQ" #voldemari consumer key
