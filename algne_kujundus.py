@@ -102,7 +102,13 @@ raam.geometry("618x400")
 raam.configure(background = color1)
 raam.option_add("*Font", ("Segoe UI", 10))#font
 paksFont = ("Times", 20, "bold")
-raam.resizable(width=FALSE, height=FALSE)
+#raam.resizable(width=FALSE, height=FALSE)
+
+#loome taustapildi
+taustapilt = ttk.Label(raam)
+taustapilt.place(x=0, y=0)
+taust = PhotoImage(file='taust.gif')
+taustapilt['image'] = taust
 
 ###loome scrollbari ja twiidiala
 twiidiala = Canvas(raam, width = 304, height = 375)
@@ -125,33 +131,50 @@ oauth_secret = f.readline().strip()
 f.close()
 twitter = Twitter(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_SECRET)) #logib twitterisse
 
-get_tweets()
+#get_tweets()
+twitterbox4 = ttk.Label(raam)
+twitterbox4.place(x=316, y=0)
+twitterbox4_pilt = PhotoImage(file="twitterbox4aylemine.gif")
+twitterbox4['image'] = twitterbox4_pilt
+
 
 #loob nupud
 nupp0 = ttk.Label(raam, text = '                        ')
-nupp0.configure(background = color1, foreground = "white")
+nupp0.configure(background = color1, foreground = "red")
 nupp0.grid (column = 2, row=1)
-nupp1 = ttk.Button(raam, text="Home", command = get_tweets)
+nupp1 = Button(raam, text="Home", width = 9, bg = 'white',command = get_tweets)
 nupp1.grid(column=3, row=1)
-nupp2 = ttk.Button(raam, text="@", command = get_mentions)
+nupp2 = Button(raam, text="@", width = 9,command = get_mentions)
 nupp2.grid(column=4, row=1)
-nupp3 = ttk.Button(raam, text="Me", command = get_tweets_mina)
+nupp3 = Button(raam, text="Me", width = 9,command = get_tweets_mina)
 nupp3.grid(column=5, row=1)
-nupp4 = ttk.Button(raam, text="    ")
+nupp4 = Button(raam, text="    ", width = 9)
 nupp4.grid(column=6, row=1)
 nupp5 = ttk.Button(raam, text="Säutsu", command = säutsumine)
-nupp5.grid(column=1, row=6, pady=5, sticky = (E))
+nupp5.grid(column=1, row=8, pady=5, sticky = (E))
 
 
 #säutsu sisestamine, uuri ttk.Text
 twiidikast = Text(raam, width=30, height=1, wrap = 'word')
-twiidikast.grid(column=1, row = 5)
+twiidikast.grid(column=1, row = 6)
 twiidikast.insert('1.0','Sisesta siia oma tweet...')
 twiidikast.bind('<1>', kustuta_tekst)
 twiidikast.bind("<KeyRelease>", validateTextInputSize)
 twiidikast.tag_add('hall tekst', '1.0', 'end')#algul tekst hall
 twiidikast.tag_configure('hall tekst', foreground = 'gray')
-Skyglow = ttk.Label(raam, text = 'Skyglow ©®', anchor = 'e')
+twiidialus = ttk.Label(raam)
+twiidialus.grid(column=1, row = 7)
+twiidialus_pilt = PhotoImage(file="raam_alus.gif")
+twiidialus['image'] = twiidialus_pilt
+twiidiylemine = ttk.Label(raam)
+twiidiylemine.grid(column=1, row = 5)
+twiidiylemine_pilt = PhotoImage(file="raam_ylemine.gif")
+twiidiylemine['image'] = twiidiylemine_pilt
+
+
+
+
+Skyglow = Label(raam, text = 'Skyglow ©®', anchor = 'e')
 Skyglow.configure(background = color1, foreground = "white")
 Skyglow.grid(column = 1, row = 1)
 
