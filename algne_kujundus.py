@@ -98,19 +98,19 @@ color1 = '#0B3A58'
 #loob akna
 raam = Tk()
 raam.title("Skyglow")
-raam.geometry("630x400")
+raam.geometry("618x400")
 raam.configure(background = color1)
 raam.option_add("*Font", ("Segoe UI", 10))#font
 paksFont = ("Times", 20, "bold")
 raam.resizable(width=FALSE, height=FALSE)
 
 ###loome scrollbari ja twiidiala
-twiidiala = Canvas(raam, width = 302, height = 370)
+twiidiala = Canvas(raam, width = 304, height = 375)
 scrollbar = ttk.Scrollbar(twiidiala)
 twiidiala.configure(yscrollcommand = scrollbar.set, scrollregion = (0,0,320,800), highlightthickness = 0)
 twiidiala.configure(bg = color1)
-twiidiala.place(x = 316, y = 30)
-scrollbar.place(x = 283, y = 0, height = 370)
+twiidiala.place(x = 316, y = 25)
+scrollbar.place(x = 285, y = 0, height = 375)
 scrollbar.configure(command=twiidiala.yview)
 
 
