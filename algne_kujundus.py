@@ -1,7 +1,5 @@
 #sisselogimise kontroll
-#twiitide pikkus
 #hyperlinkide avamine
-#s = ttk.Separator(parent, orient=HORIZONTAL)
 from tkinter import *
 from tkinter import ttk
 from twitter import *
@@ -119,7 +117,6 @@ twiidiala.place(x = 316, y = 25)
 scrollbar.place(x = 285, y = 0, height = 375)
 scrollbar.configure(command=twiidiala.yview)
 
-
 CONSUMER_KEY = "OyremhLVargLoqBAG2PZwQ" #voldemari consumer key
 CONSUMER_SECRET = "25GrCT1ItNRnHmMQc4QRD1qUpm8jvY1HTzsaYHqLCBE" #voldemari consumer secret
 kasutajanimi = "MadisKarli" #kasutajanimi
@@ -137,11 +134,10 @@ twitterbox4.place(x=316, y=0)
 twitterbox4_pilt = PhotoImage(file="twitterbox4aylemine.gif")
 twitterbox4['image'] = twitterbox4_pilt
 
-
 #loob nupud
 nupp0 = ttk.Label(raam, text = '                        ')
-nupp0.configure(background = color1, foreground = "red")
 nupp0.grid (column = 2, row=1)
+nupp0.lower()
 nupp1 = Button(raam, text="Home", width = 9, bg = 'white',command = get_tweets)
 nupp1.grid(column=3, row=1)
 nupp2 = Button(raam, text="@", width = 9,command = get_mentions)
@@ -152,7 +148,6 @@ nupp4 = Button(raam, text="    ", width = 9)
 nupp4.grid(column=6, row=1)
 nupp5 = ttk.Button(raam, text="Säutsu", command = säutsumine)
 nupp5.grid(column=1, row=8, pady=5, sticky = (E))
-
 
 #säutsu sisestamine, uuri ttk.Text
 twiidikast = Text(raam, width=30, height=1, wrap = 'word')
@@ -171,9 +166,6 @@ twiidiylemine.grid(column=1, row = 5)
 twiidiylemine_pilt = PhotoImage(file="raam_ylemine.gif")
 twiidiylemine['image'] = twiidiylemine_pilt
 
-
-
-
 Skyglow = Label(raam, text = 'Skyglow ©®', anchor = 'e')
 Skyglow.configure(background = color1, foreground = "white")
 Skyglow.grid(column = 1, row = 1)
@@ -183,13 +175,7 @@ username = ttk.Label(raam, text = 'Tere, '+kasutajanimi+ '!')
 username.configure(background = color1, foreground = "white")
 username.place(x = 0, y = 220)
 
-
-
-##space = ttk.Label(raam, text = '')
-##Voldemar.configure(background = color1, foreground = "white")
-##space.grid(column = 1, row = 13, sticky = (E))
-
-#logo osa, jpg ja png ei tööta miskipärast
+#logo osa
 logo = ttk.Label(raam)
 logo.place(x=0, y=240)
 logopilt = PhotoImage(file='logo.gif')
