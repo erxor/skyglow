@@ -110,12 +110,8 @@ taustapilt.config(padx=0, pady=0, bd=-2)
 
 ###loome scrollbari ja twiidiala
 twiidiala = Canvas(raam, width = 304, height = 375)
-twiidialataust = Label(twiidiala)
-twiidialataust.place(x=0,y=0)
-twiidialataust.config(bd=-2, padx = 0, pady=0)
 twiidialataust_pilt = PhotoImage(file = "twiitidetaust.gif")
-twiidialataust['image']=twiidialataust_pilt
-twiidialataust.lower()
+twiidiala.create_image(0,0, image =twiidialataust_pilt)
 scrollbar = ttk.Scrollbar(twiidiala)
 twiidiala.configure(yscrollcommand = scrollbar.set, scrollregion = (0,0,320,800), highlightthickness = 0)
 twiidiala.configure(bg = color1)
