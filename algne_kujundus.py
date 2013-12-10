@@ -8,25 +8,24 @@ from twitter import *
 from os.path import isfile
 from tkinter import font
 
-def validateTextInputSize(event):
-    arv = (140-(len(twiidikast.get('1.0',END))-1))
-    if arv > 99:
-        loendur = ttk.Label(raam, text = arv, anchor = 'e')
-        loendur.configure(background = color1, foreground = "white")
-        loendur.grid(column = 1, row = 6)
-    elif arv < 100:
-        if arv > -1:
-            loendur = ttk.Label(raam, text = ' '+str(arv), anchor = 'e')
-            loendur.configure(background = color1, foreground = "white")
-            loendur.grid(column = 1, row = 6)
-        elif arv < 0:
-            loendur = ttk.Label(raam, text = ' '+str(arv), anchor = 'e')
-            loendur.configure(background = color1, foreground = "red")
-            loendur.grid(column = 1, row = 6)
-    
+def validateTextInputSize(event):#Loendur toodab mingit jama counteri järgi, kui see läheb alla 10, võiks kohe ilmuda
+     arv = (140-(len(twiidikast.get('1.0',END))-1))
+     loendur = ttk.Label(raam, text = ' '+str(arv), anchor = 'e')
+     if arv > 99:
+         loendur.configure(background = color1, foreground = "white")
+         loendur.grid(column = 1, row = 6)
+     elif arv < 100:
+         if arv > -1:
+             loendur.configure(background = color1, foreground = "white")
+             loendur.grid(column = 1, row = 6)
+         elif arv < 0:
+             loendur.configure(background = color1, foreground = "red")
+             loendur.grid(column = 1, row = 6)
+
+     
 def säutsumine():
     if len(twiidikast.get('1.0',END))-1 >140:
-        pass
+        messagebox.showinfo("Viga!", message = "Twiit on liialt pikk. Maksimaalne lubatud pikkus on 140 tähemärki")
     else:
          twitter.statuses.update(status=twiidikast.get('1.0',END))
          twiidikast.delete('1.0', END)
@@ -152,6 +151,16 @@ Skyglow.grid(column = 1, row = 1)
 username = ttk.Label(raam, text = 'Tere, '+kasutajanimi+ '!')
 username.configure(background = color1, foreground = "white")
 username.place(x = 0, y = 220)
+
+###loome scrollbari
+##twiidiala = Canvas(raam, width = 320, height = 400)
+##scrollbar = ttk.Scrollbar(twiidiala)
+##frame = Frame(twiidiala)
+##twiidiala.configure(yscrollcommand = scrollbar.set, scrollregion = (0,0,310,390))
+##twiidiala.place(x = 300, y = 24)
+##scrollbar.place(x = 310, y = 0, height = 400)
+##scrollbar.config(command=twiidiala.yview)
+
 
 ##space = ttk.Label(raam, text = '')
 ##Voldemar.configure(background = color1, foreground = "white")
