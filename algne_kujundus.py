@@ -12,14 +12,14 @@ def validateTextInputSize(event):#Loendur toodab mingit jama counteri järgi, ku
      loendur = ttk.Label(raam, text = ' '+str(arv), anchor = 'e')
      if arv > 99:
          loendur.configure(background = color1, foreground = "white")
-         loendur.grid(column = 1, row = 6)
+         loendur.grid(column = 1, row = 8)
      elif arv < 100:
          if arv > -1:
              loendur.configure(background = color1, foreground = "white")
-             loendur.grid(column = 1, row = 6)
+             loendur.grid(column = 1, row = 8)
          elif arv < 0:
              loendur.configure(background = color1, foreground = "red")
-             loendur.grid(column = 1, row = 6)
+             loendur.grid(column = 1, row = 8)
 
      
 def säutsumine():
@@ -103,10 +103,10 @@ paksFont = ("Times", 20, "bold")
 #raam.resizable(width=FALSE, height=FALSE)
 
 #loome taustapildi
-taustapilt = ttk.Label(raam)
-taustapilt.place(x=0, y=0)
-taust = PhotoImage(file='taust.gif')
-taustapilt['image'] = taust
+##taustapilt = ttk.Label(raam)
+##taustapilt.place(x=0, y=0)
+##taust = PhotoImage(file='taust.gif')
+##taustapilt['image'] = taust
 
 ###loome scrollbari ja twiidiala
 twiidiala = Canvas(raam, width = 304, height = 375)
@@ -137,6 +137,7 @@ twitterbox4['image'] = twitterbox4_pilt
 #loob nupud
 nupp0 = ttk.Label(raam, text = '                        ')
 nupp0.grid (column = 2, row=1)
+nupp0.config(background = color1)
 nupp0.lower()
 nupp1 = Button(raam, text="Home", width = 9, bg = 'white',command = get_tweets)
 nupp1.grid(column=3, row=1)
@@ -157,10 +158,14 @@ twiidikast.bind('<1>', kustuta_tekst)
 twiidikast.bind("<KeyRelease>", validateTextInputSize)
 twiidikast.tag_add('hall tekst', '1.0', 'end')#algul tekst hall
 twiidikast.tag_configure('hall tekst', foreground = 'gray')
+
+#kasi alus ja ülemine osa
 twiidialus = ttk.Label(raam)
 twiidialus.grid(column=1, row = 7)
+twiidialus.config(borderwidth = 0)
 twiidialus_pilt = PhotoImage(file="raam_alus.gif")
 twiidialus['image'] = twiidialus_pilt
+
 twiidiylemine = ttk.Label(raam)
 twiidiylemine.grid(column=1, row = 5)
 twiidiylemine_pilt = PhotoImage(file="raam_ylemine.gif")
