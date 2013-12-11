@@ -12,14 +12,14 @@ def validateTextInputSize(event):#Loendur toodab mingit jama counteri järgi, ku
      loendur = ttk.Label(raam, text = ' '+str(arv), anchor = 'e')
      if arv > 99:
          loendur.configure(background = color1, foreground = "white")
-         loendur.grid(column = 1, row = 8)
+         loendur.grid(column = 1, row = 5)
      elif arv < 100:
          if arv > -1:
              loendur.configure(background = color1, foreground = "white")
-             loendur.grid(column = 1, row = 8)
+             loendur.grid(column = 1, row = 5)
          elif arv < 0:
              loendur.configure(background = color1, foreground = "red")
-             loendur.grid(column = 1, row = 8)
+             loendur.grid(column = 1, row = 5)
 
      
 def säutsumine():
@@ -158,11 +158,11 @@ nupp3.grid(column=5, row=1)
 nupp4 = Button(raam, text="    ", width = 9)
 nupp4.grid(column=6, row=1)
 nupp5 = ttk.Button(raam, text="Säutsu", command = säutsumine)
-nupp5.grid(column=1, row=8, pady=5, sticky = (E))
+nupp5.grid(column=1, row=5, pady=2, sticky = (E))
 
 #säutsu sisestamine
 twiidikast = Text(raam, width=30, height=1, wrap = 'word')
-twiidikast.grid(column=1, row = 6)
+twiidikast.grid(column=1, row = 3)
 twiidikast.insert('1.0','Sisesta siia oma tweet...')
 twiidikast.bind('<1>', kustuta_tekst)
 twiidikast.bind("<KeyRelease>", validateTextInputSize)
@@ -172,13 +172,13 @@ twiidikast.tag_configure('hall tekst', foreground = 'gray')
 
 #kasti alus ja ülemine osa
 twiidialus = Label(raam)
-twiidialus.grid(column=1, row = 7)
+twiidialus.grid(column=1, row = 4)
 twiidialus.config(bd=-2, padx = 0, pady=0)
 twiidialus_pilt = PhotoImage(file="raam_alus.gif")
 twiidialus['image'] = twiidialus_pilt
 
 twiidiylemine = Label(raam)
-twiidiylemine.grid(column=1, row = 5)
+twiidiylemine.grid(column=1, row = 2)
 twiidiylemine_pilt = PhotoImage(file="raam_ylemine.gif")
 twiidiylemine['image'] = twiidiylemine_pilt
 twiidiylemine.config(bd=-2, padx = 0, pady=0)
