@@ -148,7 +148,6 @@ def get_tweets():
         c += 70
     twitterbox1_pilt = PhotoImage(file = "tweet4.gif")
     twiidiala.create_image(0,0, image =twitterbox1_pilt)
-    twiidiala.pack()
 
 def get_mentions():
     c = 40
