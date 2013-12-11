@@ -7,6 +7,60 @@ from os.path import isfile
 from tkinter import font
 from textwrap import * 
 
+tweets_home = []
+tweets_me = []
+tweets_at = []
+
+
+def refresh_home():
+     statuses = twitter.statuses.home_timeline()
+     säutsud = []
+     for a in range(0,15):
+          x = statuses[a]
+          tweet = x['text'] #krabame dictist teksti
+          user = (x['user'])['screen_name'] #krabame dicti subdictist username
+          name = (x['user'])['name'] #lisaks usernamele võtaks silmale meeldivama nime ka
+          säuts = [name, user, tweet]
+          säutsud.insert(0, säuts)
+     for i in säutsud:
+          if i not in tweets_home:
+               tweets_home.insert(0, i)
+     säutsud = []
+
+def refresh_me():
+     statuses = twitter.statuses.user_timeline()
+     säutsud = []
+     for a in range(0,15):
+          x = statuses[a]
+          tweet = x['text']
+          user = (x['user'])['screen_name']
+          name = (x['user'])['name']
+          säuts = [name, user, tweet]
+          säutsud.insert(0, säuts)
+     for i in säutsud:
+          if i not in tweets_me:
+               tweets_me.insert(0, i)
+
+def refresh_at():
+     statuses = twitter.statuses.mentions_timeline()
+     säutsud = []
+     for a in range(0,15):
+          x = statuses[a]
+          tweet = x['text']
+          user = (x['user'])['screen_name']
+          name = (x['user'])['name']
+          säuts = [name, user, tweet]
+          säutsud.insert(0, säuts)
+     for i in säutsud:
+          if i not in tweets_at:
+               tweets_at.insert(0, i)
+
+def refresh():
+     refresh_home()
+     refresh_me()
+     refresh_at()
+          
+     
 def validateTextInputSize(event):#Loendur toodab mingit jama counteri järgi, kui see läheb alla 10, võiks kohe ilmuda
      arv = (140-(len(twiidikast.get('1.0',END))-1))
      loendur = ttk.Label(raam, text = ' '+str(arv), anchor = 'e')
@@ -54,41 +108,26 @@ def get_tweets_mina():
     twiidiala.delete(ALL)#teeme tahvli puhtaks
     scrollbar.set(0.0, 0.43529411764705883)#liigutame scrollbari üles
     twiidiala.yview('moveto', '0.0')#liigutame vaate üles
-    statuses = twitter.statuses.user_timeline()
-    for a in range(0,11):
-        x = statuses[a]
-        tweet = x['text']
-        user = (x['user'])['screen_name']
-        name = (x['user'])['name']
-        parem_twiit(name, user, tweet, c)
+    for a in tweets_me:
+        parem_twiit(a[0], a[1], a[2], c)
         c += 70
 
 def get_tweets():
-    c = 30
+    c = 40
     twiidiala.delete(ALL)
     scrollbar.set(0.0, 0.43529411764705883)
     twiidiala.yview('moveto', '0.0')
-    statuses = twitter.statuses.home_timeline()
-    for a in range(0,11):
-        x = statuses[a]
-        tweet = x['text'] #krabame dictist teksti
-        user = (x['user'])['screen_name'] #krabame dicti subdictist username
-        name = (x['user'])['name'] #lisaks usernamele võtaks silmale meeldivama nime ka
-        parem_twiit(name, user, tweet, c)
+    for a in tweets_home:
+        parem_twiit(a[0], a[1], a[2], c)
         c += 70
 
 def get_mentions():
-    c = 30
+    c = 40
     twiidiala.delete(ALL)
     scrollbar.set(0.0, 0.43529411764705883)
     twiidiala.yview('moveto', '0.0')
-    statuses = twitter.statuses.mentions_timeline()
-    for a in range(0,11):
-        x = statuses[a]
-        tweet = x['text']
-        user = (x['user'])['screen_name']
-        name = (x['user'])['name']
-        parem_twiit(name, user, tweet, c)
+    for a in tweets_at:
+        parem_twiit(a[0], a[1], a[2], c)
         c += 70
                 
         
@@ -137,7 +176,11 @@ twitter = Twitter(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_S
 ##twitterbox1['image'] = twitterbox1_pilt
 ##twitterbox1.config(bd=-2, padx = 0, pady=0)
 
-#get_tweets()
+refresh_home()
+refresh_me()
+refresh_at()
+get_tweets()
+
 twitterbox4 = Label(raam)
 twitterbox4.place(x=316, y=0)
 twitterbox4_pilt = PhotoImage(file="twitterbox4aylemine.gif")
@@ -155,7 +198,7 @@ nupp2 = Button(raam, text="@", width = 9,command = get_mentions)
 nupp2.grid(column=4, row=1)
 nupp3 = Button(raam, text="Me", width = 9,command = get_tweets_mina)
 nupp3.grid(column=5, row=1)
-nupp4 = Button(raam, text="    ", width = 9)
+nupp4 = Button(raam, text="Refresh", width = 9, command = refresh)
 nupp4.grid(column=6, row=1)
 nupp5 = ttk.Button(raam, text="Säutsu", command = säutsumine)
 nupp5.grid(column=1, row=5, pady=2, sticky = (E))
