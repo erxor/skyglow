@@ -9,8 +9,23 @@ from textwrap import wrap
 tweets_home = []
 tweets_me = []
 tweets_at = []
+search = []
 
-
+def refresh_search():
+     statuses = twitter.search.tweets(q='Madiskarli')['statuses']
+     säutsud = []
+     for a in range(0,11):
+          x = statuses[a]
+          tweet = x['text'] #krabame dictist teksti
+          user = (x['user'])['screen_name'] #krabame dicti subdictist username
+          name = (x['user'])['name'] #lisaks usernamele võtaks silmale meeldivama nime ka
+          säuts = [name, user, tweet]
+          säutsud.insert(0, säuts)
+     for i in säutsud:
+          if i not in search:
+               search.insert(0, i)
+     säutsud = []
+     
 def refresh_home():
      statuses = twitter.statuses.home_timeline()
      säutsud = []
@@ -58,6 +73,7 @@ def refresh():
      refresh_home()
      refresh_me()
      refresh_at()
+     refresh_search()
           
      
 def validateTextInputSize(event):#Loendur toodab mingit jama counteri järgi, kui see läheb alla 10, võiks kohe ilmuda
@@ -101,6 +117,15 @@ def parem_twiit(name, user, tweet, yasukoht):
         elif len(tweet) == 4:
              tweet = tweet[0]+'\n'+tweet[1]+'\n'+tweet[2]+'\n'+tweet[3]
         twiidiala.create_text(2,yasukoht, text = (name+'   '+"@"+user+"\n"+tweet+'\n'), anchor = 'w', font =("Segoe UI", 8), fill = "white")
+
+def get_search():
+     c = 40
+     twiidiala.delete(ALL)
+     scrollbar.set(0.0, 0.43529411764705883)
+     twiidiala.yview('moveto', '0.0')
+     for a in search:
+          parem_twiit(a[0], a[1], a[2], c)
+          c += 70
 
 def get_tweets_mina():
     c = 40
@@ -179,7 +204,9 @@ twitter = Twitter(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_S
 refresh_home()
 refresh_me()
 refresh_at()
+refresh_search()
 get_tweets()
+
 
 #nuppude taustad
 twitterbox4 = Label(raam)
@@ -198,7 +225,7 @@ nupp2 = Button(raam, text="@", width = 9,command = get_mentions)
 nupp2.grid(column=4, row=1)
 nupp3 = Button(raam, text="Me", width = 9,command = get_tweets_mina)
 nupp3.grid(column=5, row=1)
-nupp4 = Button(raam, text="Refresh", width = 9, command = refresh)
+nupp4 = Button(raam, text="Search", width = 9, command = get_search)
 nupp4.grid(column=6, row=1)
 nupp5 = ttk.Button(raam, text="Säutsu", command = säutsumine)
 nupp5.grid(column=1, row=5, pady=2, sticky = (E))
