@@ -306,7 +306,7 @@ twiidiylemine.config(bd=-2, padx = 0, pady=0)
 
 #peidetud otsingukaust
 otsingukast = Entry(raam)
-otsingukast.place(x=300, y=40)
+otsingukast.place(x=450, y=25)
 otsingukast.bind("<Return>", refresh_search)
 otsingukast.lower()
 kontrollmuutuja = 1
