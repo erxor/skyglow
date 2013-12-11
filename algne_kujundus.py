@@ -79,7 +79,7 @@ def refresh():
 def validateTextInputSize(event):#Loendur toodab mingit jama counteri järgi, kui see läheb alla 10, võiks kohe ilmuda
      arv = (140-(len(twiidikast.get('1.0',END))-1))
      loendur = ttk.Label(raam, text = ' '+str(arv))
-     loendur.config(background = color1, foreground = "white")
+     loendur.config(background = color1)
      loendur.grid(column=1, row = 5)
      if arv > -1:
           loendur.configure(background = color1, foreground = "white")
@@ -146,6 +146,9 @@ def get_tweets():
     for a in tweets_home:
         parem_twiit(a[0], a[1], a[2], c)
         c += 70
+    twitterbox1_pilt = PhotoImage(file = "tweet4.gif")
+    twiidiala.create_image(0,0, image =twitterbox1_pilt)
+    twiidiala.pack()
 
 def get_mentions():
     c = 40
@@ -163,10 +166,10 @@ color1 = '#0B3A58'
 #loob akna
 raam = Tk()
 raam.title("Skyglow")
-raam.geometry("618x400")
+raam.geometry("614x400")
 raam.option_add("*Font", ("Segoe UI", 10))#font
 paksFont = ("Times", 20, "bold")
-raam.resizable(width=FALSE, height=FALSE)
+#raam.resizable(width=FALSE, height=FALSE)
 
 #loome taustapildi
 taustapilt = Label(raam)
@@ -176,14 +179,14 @@ taustapilt['image'] = taust
 taustapilt.config(padx=0, pady=0, bd=-2)
 
 #loome scrollbari ja twiidiala
-twiidiala = Canvas(raam, width = 304, height = 375)
-twiidialataust_pilt = PhotoImage(file = "twiitidetaust.gif")
-twiidiala.create_image(0,0, image =twiidialataust_pilt)
+twiidiala = Canvas(raam, width = 340, height = 380)
+twiidialataust= PhotoImage(file = "twiitideselg.gif")
+#twiidiala.create_image(0,0, image =twiidialataust)
+twiidiala.config(background=color1)
 scrollbar = ttk.Scrollbar(twiidiala)
 twiidiala.configure(yscrollcommand = scrollbar.set, scrollregion = (0,0,320,800), highlightthickness = 0)
-twiidiala.configure(bg = color1)
-twiidiala.place(x = 316, y = 25)
-scrollbar.place(x = 285, y = 0, height = 375)
+twiidiala.place(x = 278, y = 20)
+scrollbar.place(x = 320, y = 0, height = 380)
 scrollbar.configure(command=twiidiala.yview)
 
 #twitteri jama
@@ -197,12 +200,7 @@ oauth_token = f.readline().strip()
 oauth_secret = f.readline().strip()
 f.close()
 twitter = Twitter(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_SECRET)) #logib twitterisse
-#twiitide taustad
-##twitterbox1 = Label(twiidiala)
-##twitterbox1.place(x=0, y=0)
-##twitterbox1_pilt = PhotoImage(file="tweet1.gif")
-##twitterbox1['image'] = twitterbox1_pilt
-##twitterbox1.config(bd=-2, padx = 0, pady=0)
+
 
 #küsime tweete
 refresh_home()
@@ -218,21 +216,22 @@ nupp2_taust = PhotoImage(file="nupp2.gif")
 nupp3_taust = PhotoImage(file="nupp3.gif")
 nupp4_taust = PhotoImage(file="nupp4.gif")
 #loob nupud
-nupp0 = ttk.Label(raam, text = '                        ')
+nupp0 = Label(raam)
+nupp0.config(width= 8)
 nupp0.grid (column = 2, row=1)
 nupp0.lower()
 nupp1 = Button(raam,command = get_tweets)
 nupp1.grid(column=3, row=1)
-nupp1.config(image=nupp1_taust, width = 75, height = 20, bd=0, highlightthickness=0)
+nupp1.config(image=nupp1_taust, width = 80, height = 20, bd=0, highlightthickness=0)
 nupp2 = Button(raam,command = get_mentions)
 nupp2.grid(column=4, row=1)
-nupp2.config(image=nupp2_taust, width = 75, height = 20, bd=0,highlightthickness=0)
+nupp2.config(image=nupp2_taust, width = 80, height = 20, bd=0,highlightthickness=0)
 nupp3 = Button(raam,command = get_tweets_mina)
 nupp3.grid(column=5, row=1)
-nupp3.config(image=nupp3_taust, width = 75, height = 20, bd=0, highlightthickness=0)
+nupp3.config(image=nupp3_taust, width = 80, height = 20, bd=0, highlightthickness=0)
 nupp4 = Button(raam, command = get_search)
 nupp4.grid(column=6, row=1)
-nupp4.config(image=nupp4_taust, width = 75, height = 20, bd=0, highlightthickness=0)
+nupp4.config(image=nupp4_taust, width = 80, height = 20, bd=0, highlightthickness=0)
 nupp5 = Button(raam, text="Säutsu", command = säutsumine)
 nupp5.grid(column=1, row=5, pady=2, sticky = (E))
 
@@ -267,3 +266,7 @@ logopilt = PhotoImage(file='logo.gif')
 logo['image'] = logopilt
 logo.config(bd=-2, padx = 0, pady=0)
 raam.mainloop()
+
+#twiitide taustad
+twitterbox1_pilt = PhotoImage(file = "tweet4.gif")
+twiidiala.create_image(0,0, image =twitterbox1_pilt)
