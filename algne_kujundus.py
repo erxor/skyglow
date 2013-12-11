@@ -1,11 +1,10 @@
 #sisselogimise kontroll
-#hyperlinkide avamine
 from tkinter import *
 from tkinter import ttk
 from twitter import *
 from os.path import isfile
 from tkinter import font
-from textwrap import * 
+from textwrap import wrap 
 
 tweets_home = []
 tweets_me = []
@@ -138,7 +137,7 @@ raam.title("Skyglow")
 raam.geometry("618x400")
 raam.option_add("*Font", ("Segoe UI", 10))#font
 paksFont = ("Times", 20, "bold")
-#raam.resizable(width=FALSE, height=FALSE)
+raam.resizable(width=FALSE, height=FALSE)
 
 #loome taustapildi
 taustapilt = Label(raam)
@@ -147,7 +146,7 @@ taust = PhotoImage(file='taust.gif')
 taustapilt['image'] = taust
 taustapilt.config(padx=0, pady=0, bd=-2)
 
-###loome scrollbari ja twiidiala
+#loome scrollbari ja twiidiala
 twiidiala = Canvas(raam, width = 304, height = 375)
 twiidialataust_pilt = PhotoImage(file = "twiitidetaust.gif")
 twiidiala.create_image(0,0, image =twiidialataust_pilt)
@@ -158,7 +157,7 @@ twiidiala.place(x = 316, y = 25)
 scrollbar.place(x = 285, y = 0, height = 375)
 scrollbar.configure(command=twiidiala.yview)
 
-
+#twitteri jama
 CONSUMER_KEY = "OyremhLVargLoqBAG2PZwQ" #voldemari consumer key
 CONSUMER_SECRET = "25GrCT1ItNRnHmMQc4QRD1qUpm8jvY1HTzsaYHqLCBE" #voldemari consumer secret
 kasutajanimi = "erx0r" #kasutajanimi
@@ -176,11 +175,13 @@ twitter = Twitter(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_S
 ##twitterbox1['image'] = twitterbox1_pilt
 ##twitterbox1.config(bd=-2, padx = 0, pady=0)
 
+#küsime tweete
 refresh_home()
 refresh_me()
 refresh_at()
 get_tweets()
 
+#nuppude taustad
 twitterbox4 = Label(raam)
 twitterbox4.place(x=316, y=0)
 twitterbox4_pilt = PhotoImage(file="twitterbox4aylemine.gif")
@@ -190,7 +191,6 @@ twitterbox4.config(bd=-2, padx = 0, pady=0)
 #loob nupud
 nupp0 = ttk.Label(raam, text = '                        ')
 nupp0.grid (column = 2, row=1)
-nupp0.config(background = color1)
 nupp0.lower()
 nupp1 = Button(raam, text="Home", width = 9, bg = 'white',command = get_tweets)
 nupp1.grid(column=3, row=1)
