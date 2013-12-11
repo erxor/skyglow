@@ -181,7 +181,7 @@ taustapilt.config(padx=0, pady=0, bd=-2)
 
 #loome scrollbari ja twiidiala
 twiidiala = Canvas(raam, width = 304, height = 375)
-twiidialataust_pilt = PhotoImage(file = "twiitidetaust.gif")
+twiidialataust_pilt = PhotoImage(file = "selg.gif")
 twiidiala.create_image(0,0, image =twiidialataust_pilt)
 scrollbar = ttk.Scrollbar(twiidiala)
 twiidiala.configure(yscrollcommand = scrollbar.set, scrollregion = (0,0,320,800), highlightthickness = 0)
@@ -217,24 +217,26 @@ get_tweets()
 
 
 #nuppude taustad
-twitterbox4 = Label(raam)
-twitterbox4.place(x=316, y=0)
-twitterbox4_pilt = PhotoImage(file="twitterbox4aylemine.gif")
-twitterbox4['image'] = twitterbox4_pilt
-twitterbox4.config(bd=-2, padx = 0, pady=0)
-
+nupp1_taust = PhotoImage(file="nupp1.gif")
+nupp2_taust = PhotoImage(file="nupp2.gif")
+nupp3_taust = PhotoImage(file="nupp3.gif")
+nupp4_taust = PhotoImage(file="nupp4.gif")
 #loob nupud
 nupp0 = ttk.Label(raam, text = '                        ')
 nupp0.grid (column = 2, row=1)
 nupp0.lower()
-nupp1 = Button(raam, text="Home", width = 9, bg = 'white',command = get_tweets)
+nupp1 = Button(raam,command = get_tweets)
 nupp1.grid(column=3, row=1)
-nupp2 = Button(raam, text="@", width = 9,command = get_mentions)
+nupp1.config(image=nupp1_taust, width = 80, height = 20, bd=0, highlightthickness=0)
+nupp2 = Button(raam,command = get_mentions)
 nupp2.grid(column=4, row=1)
-nupp3 = Button(raam, text="Me", width = 9,command = get_tweets_mina)
+nupp2.config(image=nupp2_taust, width = 80, height = 20, bd=0,highlightthickness=0)
+nupp3 = Button(raam,command = get_tweets_mina)
 nupp3.grid(column=5, row=1)
-nupp4 = Button(raam, text="Search", width = 9, command = get_search)
+nupp3.config(image=nupp3_taust, width = 80, height = 20, bd=0, highlightthickness=0)
+nupp4 = Button(raam, command = get_search)
 nupp4.grid(column=6, row=1)
+nupp4.config(image=nupp4_taust, width = 80, height = 20, bd=0, highlightthickness=0)
 nupp5 = ttk.Button(raam, text="Säutsu", command = säutsumine)
 nupp5.grid(column=1, row=5, pady=2, sticky = (E))
 
@@ -252,12 +254,12 @@ twiidikast.tag_configure('hall tekst', foreground = 'gray')
 twiidialus = Label(raam)
 twiidialus.grid(column=1, row = 4)
 twiidialus.config(bd=-2, padx = 0, pady=0)
-twiidialus_pilt = PhotoImage(file="raam_alus.gif")
+twiidialus_pilt = PhotoImage(file="raam_bots.gif")
 twiidialus['image'] = twiidialus_pilt
 
 twiidiylemine = Label(raam)
 twiidiylemine.grid(column=1, row = 2)
-twiidiylemine_pilt = PhotoImage(file="raam_ylemine.gif")
+twiidiylemine_pilt = PhotoImage(file="raam_topp.gif")
 twiidiylemine['image'] = twiidiylemine_pilt
 twiidiylemine.config(bd=-2, padx = 0, pady=0)
 
