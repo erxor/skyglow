@@ -14,19 +14,20 @@ search = []
 
 
 def get_search():
-     otsingukast.lift()
      c = 40
-     i=0
+     i=j=0
      twiidiala.delete(ALL)
+     if len(search) == 0:
+          for i in range(7):
+               twiidiala.create_image(160,35+j, image =twiidialataust4)
+               j += 60
+     otsingukast.lift()
      scrollbar.set(0.0, 0.43529411764705883)
      scrollbari_pikkus=10 + len(search)*60
      twiidiala.config(scrollregion = (0,0,320,scrollbari_pikkus))
      twiidiala.yview('moveto', '0.0')
      for a in search:
           tweet = parem_twiit(a[0],a[1],a[2])
-          #label=Label(twiidiala, image=twiidialataust4,anchor=NW, text=tweet,bd=0,padx=0, pady=0,fg=color2,font=("Segoe UI", 8),justify=LEFT,compound=CENTER)
-          #label.pack()
-          #label.place(x=0,y=i)
           twiidiala.create_image(160,35+i, image =twiidialataust4)
           tekst = twiidiala.create_text(5,40+i, anchor=W, text = tweet, fill=color2, font=("Segoe UI", 8))
           i += 60
@@ -257,9 +258,9 @@ nupp0.config(width= 8)
 nupp0.grid (column = 2, row=1)
 nupp0.lower()
 
-nupp1 = Button(raam,command = get_tweets)
-nupp2 = Button(raam,command = get_mentions)
-nupp3 = Button(raam,command = get_tweets_mina)
+nupp1 = Button(raam, command = get_tweets)
+nupp2 = Button(raam, command = get_mentions)
+nupp3 = Button(raam, command = get_tweets_mina)
 nupp4 = Button(raam, command = get_search)
 nupp5 = Button(raam, text="Säutsu", command = säutsumine)
 
@@ -269,10 +270,10 @@ nupp3.grid(column=5, row=1)
 nupp4.grid(column=6, row=1)
 nupp5.grid(column=1, row=5, pady=2, sticky = (E))
 
-nupp1.config(image=nupp1_taust, width = 80, height = 20, bd=0, highlightthickness=0)
-nupp2.config(image=nupp2_taust, width = 80, height = 20, bd=0,highlightthickness=0)
-nupp3.config(image=nupp3_taust, width = 80, height = 20, bd=0, highlightthickness=0)
-nupp4.config(image=nupp4_taust, width = 80, height = 20, bd=0, highlightthickness=0)
+nupp1.config(image=nupp1_taust, width = 80, height = 20, bd = 0, highlightthickness=0)
+nupp2.config(image=nupp2_taust, width = 80, height = 20, bd = 0, highlightthickness=0)
+nupp3.config(image=nupp3_taust, width = 80, height = 20, bd = 0, highlightthickness=0)
+nupp4.config(image=nupp4_taust, width = 80, height = 20, bd = 0, highlightthickness=0)
 
 
 #säutsu sisestamine
@@ -298,6 +299,8 @@ twiidiylemine_pilt = PhotoImage(file="raam_topp.gif")
 twiidiylemine['image'] = twiidiylemine_pilt
 twiidiylemine.config(bd=-2, padx = 0, pady=0)
 
+
+#peidetud otsingukaust
 otsingukast = Entry(raam)
 otsingukast.place(x=300, y=40)
 otsingukast.bind("<Return>", refresh_search)
