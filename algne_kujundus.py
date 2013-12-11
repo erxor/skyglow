@@ -135,7 +135,7 @@ def kustuta_tekst(event):
 
 
 def parem_twiit(name, user, tweet):
-        tweet = wrap(tweet, width = 50)
+        tweet = wrap(tweet, width = 55)
         if len(tweet) == 1:
              tweet = tweet[0]
         elif len(tweet) == 2:
