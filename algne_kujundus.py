@@ -78,17 +78,13 @@ def refresh():
      
 def validateTextInputSize(event):#Loendur toodab mingit jama counteri järgi, kui see läheb alla 10, võiks kohe ilmuda
      arv = (140-(len(twiidikast.get('1.0',END))-1))
-     loendur = ttk.Label(raam, text = ' '+str(arv), anchor = 'e')
-     if arv > 99:
-         loendur.configure(background = color1, foreground = "white")
-         loendur.grid(column = 1, row = 5)
-     elif arv < 100:
-         if arv > -1:
-             loendur.configure(background = color1, foreground = "white")
-             loendur.grid(column = 1, row = 5)
-         elif arv < 0:
-             loendur.configure(background = color1, foreground = "red")
-             loendur.grid(column = 1, row = 5)
+     loendur = ttk.Label(raam, text = ' '+str(arv))
+     loendur.config(background = color1, foreground = "white")
+     loendur.grid(column=1, row = 5)
+     if arv > -1:
+          loendur.configure(background = color1, foreground = "white")
+     if arv < 0:
+          loendur.configure(foreground = "red")
 
      
 def säutsumine():
@@ -237,7 +233,7 @@ nupp3.config(image=nupp3_taust, width = 75, height = 20, bd=0, highlightthicknes
 nupp4 = Button(raam, command = get_search)
 nupp4.grid(column=6, row=1)
 nupp4.config(image=nupp4_taust, width = 75, height = 20, bd=0, highlightthickness=0)
-nupp5 = ttk.Button(raam, text="Säutsu", command = säutsumine)
+nupp5 = Button(raam, text="Säutsu", command = säutsumine)
 nupp5.grid(column=1, row=5, pady=2, sticky = (E))
 
 #säutsu sisestamine
@@ -245,7 +241,7 @@ twiidikast = Text(raam, width=30, height=1, wrap = 'word')
 twiidikast.grid(column=1, row = 3)
 twiidikast.insert('1.0','Sisesta siia oma tweet...')
 twiidikast.bind('<1>', kustuta_tekst)
-twiidikast.bind("<KeyRelease>", validateTextInputSize)
+twiidikast.bind("<KeyPress>", validateTextInputSize)
 twiidikast.tag_add('hall tekst', '1.0', 'end')#algul tekst hall
 twiidikast.tag_configure('hall tekst', foreground = 'gray')
 
