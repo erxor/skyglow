@@ -15,6 +15,8 @@ def refresh_search():
      statuses = twitter.search.tweets(q='Madiskarli')['statuses']
      säutsud = []
      for a in range(0,11):
+          twiidialataust= PhotoImage(file = "tweet4.gif")
+          twiidiala.create_image(160,35+a*20, image =twiidialataust)
           x = statuses[a]
           tweet = x['text'] #krabame dictist teksti
           user = (x['user'])['screen_name'] #krabame dicti subdictist username
@@ -112,7 +114,9 @@ def parem_twiit(name, user, tweet, yasukoht):
              tweet = tweet[0]+'\n'+tweet[1]+'\n'+tweet[2]
         elif len(tweet) == 4:
              tweet = tweet[0]+'\n'+tweet[1]+'\n'+tweet[2]+'\n'+tweet[3]
+        twitterbox1_pilt = PhotoImage(file = "tweet4.gif")
         twiidiala.create_text(2,yasukoht, text = (name+'   '+"@"+user+"\n"+tweet+'\n'), anchor = 'w', font =("Segoe UI", 8), fill = "white")
+        twiidiala.create_image(2,yasukoht, image =twitterbox1_pilt)
 
 def get_search():
      c = 40
@@ -148,6 +152,7 @@ def get_tweets():
         c += 70
     twitterbox1_pilt = PhotoImage(file = "tweet4.gif")
     twiidiala.create_image(0,0, image =twitterbox1_pilt)
+    #twiidiala.pack()
 
 def get_mentions():
     c = 40
@@ -178,10 +183,10 @@ taustapilt['image'] = taust
 taustapilt.config(padx=0, pady=0, bd=-2)
 
 #loome scrollbari ja twiidiala
-twiidiala = Canvas(raam, width = 340, height = 380)
-twiidialataust= PhotoImage(file = "twiitideselg.gif")
-#twiidiala.create_image(0,0, image =twiidialataust)
-twiidiala.config(background=color1)
+twiidiala = Canvas(width = 340, height = 380)
+twiidialataust= PhotoImage(file = "tweet4.gif")
+twiidiala.create_image(160,35, image =twiidialataust)
+#twiidiala.config(background=color1)
 scrollbar = ttk.Scrollbar(twiidiala)
 twiidiala.configure(yscrollcommand = scrollbar.set, scrollregion = (0,0,320,800), highlightthickness = 0)
 twiidiala.place(x = 278, y = 20)
@@ -206,7 +211,7 @@ refresh_home()
 refresh_me()
 refresh_at()
 refresh_search()
-get_tweets()
+#get_tweets()
 
 
 #nuppude taustad
