@@ -14,14 +14,18 @@ search = []
 def get_search():
      otsingukast.lift()
      c = 40
+     i=0
      twiidiala.delete(ALL)
      scrollbar.set(0.0, 0.43529411764705883)
      scrollbari_pikkus=len(search)*70
      twiidiala.config(scrollregion = (0,0,320,scrollbari_pikkus))
      twiidiala.yview('moveto', '0.0')
      for a in search:
-          parem_twiit(a[0], a[1], a[2], c)
-          c += 70
+          tweet = parem_twiit(a[0],a[1],a[2])
+          label=Label(twiidiala, image=twiidialataust, text=tweet,bd=0,padx=0, pady=0,fg=color2,font=("Segoe UI", 8),anchor=W,justify=LEFT,compound=CENTER)
+          #label.pack()
+          label.place(x=0,y=i)
+          i += 60
      
 def refresh_search(event):
      statuses = twitter.search.tweets(q=otsingukast.get())['statuses']
@@ -114,7 +118,7 @@ def kustuta_tekst(event):
     twiidikast.delete('1.0', END)
     twiidikast.configure(height = 5)
 
-def parem_twiit(name, user, tweet, yasukoht):
+def parem_twiit(name, user, tweet):
         tweet = wrap(tweet, width = 50)
         if len(tweet) == 1:
              tweet = tweet[0]
@@ -124,7 +128,8 @@ def parem_twiit(name, user, tweet, yasukoht):
              tweet = tweet[0]+'\n'+tweet[1]+'\n'+tweet[2]
         elif len(tweet) == 4:
              tweet = tweet[0]+'\n'+tweet[1]+'\n'+tweet[2]+'\n'+tweet[3]
-        twiidiala.create_text(2,yasukoht, text = (name+'   '+"@"+user+"\n"+tweet+'\n'), anchor = 'w', font =("Segoe UI", 8), fill = "red")
+        return name+'   '+"@"+user+"\n"+tweet+'\n'
+        #twiidiala.create_text(2,yasukoht, text = (name+'   '+"@"+user+"\n"+tweet+'\n'), anchor = 'w', font =("Segoe UI", 8), fill = "white")
 
 
 def get_tweets_mina():
@@ -162,6 +167,7 @@ def get_mentions():
                 
         
 color1 = '#0B3A58'
+color2 = '#5aac8c'
 #loob akna
 raam = Tk()
 raam.title("Skyglow")
