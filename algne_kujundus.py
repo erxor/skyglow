@@ -104,11 +104,15 @@ def refresh():
      refresh_search()
           
      
-def validateTextInputSize(event):#Loendur toodab mingit jama counteri järgi, kui see läheb alla 10, võiks kohe ilmuda
+def twiidi_pikkuse_loendur(event):#Loendur toodab mingit jama counteri järgi, kui see läheb alla 10, võiks kohe ilmuda
      arv = (140-(len(twiidikast.get('1.0',END))-1))
-     loendur = ttk.Label(raam, text = ' '+str(arv))
+     loendur = ttk.Label(raam, text = ' '+ str(arv))
      loendur.config(background = "white")
      loendur.place(x=117, y = 243)
+     if arv < 100:
+          loendur.config(text = "  " + str(arv) + "  ")
+     if arv < 10:
+          loendur.config(text = "   " + str(arv) + " ")
      if arv > -1:
           loendur.configure(foreground = "black")
      if arv < 0:
@@ -200,7 +204,7 @@ raam.title("Skyglow")
 raam.geometry("614x400")
 raam.option_add("*Font", ("Segoe UI", 10))#font
 paksFont = ("Times", 20, "bold")
-#raam.resizable(width=FALSE, height=FALSE)
+raam.resizable(width=FALSE, height=FALSE)
 
 
 #loome taustapildi
@@ -251,6 +255,7 @@ nupp1_taust = PhotoImage(file="nupp1.gif")
 nupp2_taust = PhotoImage(file="nupp2.gif")
 nupp3_taust = PhotoImage(file="nupp3.gif")
 nupp4_taust = PhotoImage(file="nupp4.gif")
+nupp5_taust = PhotoImage(file="säutsu.gif")
 
 nupp0 = Label(raam)
 nupp0.config(width= 8)
@@ -261,7 +266,7 @@ nupp1 = Button(raam, command = get_tweets)
 nupp2 = Button(raam, command = get_mentions)
 nupp3 = Button(raam, command = get_tweets_mina)
 nupp4 = Button(raam, command = get_search)
-nupp5 = Button(raam, text="Säutsu", command = säutsumine)
+nupp5 = Button(raam, command = säutsumine)
 
 nupp1.grid(column=3, row=1)
 nupp2.grid(column=4, row=1)
@@ -269,18 +274,18 @@ nupp3.grid(column=5, row=1)
 nupp4.grid(column=6, row=1)
 nupp5.grid(column=1, row=5, pady=2, sticky = (E))
 
-nupp1.config(image=nupp1_taust, width = 80, height = 20, bd = 0, highlightthickness=0)
-nupp2.config(image=nupp2_taust, width = 80, height = 20, bd = 0, highlightthickness=0)
-nupp3.config(image=nupp3_taust, width = 80, height = 20, bd = 0, highlightthickness=0)
-nupp4.config(image=nupp4_taust, width = 80, height = 20, bd = 0, highlightthickness=0)
-
+nupp1.config(image=nupp1_taust, width = 80, height = 20, bd = 0, highlightthickness = 0)
+nupp2.config(image=nupp2_taust, width = 80, height = 20, bd = 0, highlightthickness = 0)
+nupp3.config(image=nupp3_taust, width = 80, height = 20, bd = 0, highlightthickness = 0)
+nupp4.config(image=nupp4_taust, width = 80, height = 20, bd = 0, highlightthickness = 0)
+nupp5.config(image=nupp5_taust, width = 60, height = 30, bd = 0, highlightthickness = 0) 
 
 #säutsu sisestamine
 twiidikast = Text(raam, width=30, height=1, wrap = 'word')
 twiidikast.grid(column=1, row = 3)
 twiidikast.insert('1.0','Sisesta siia oma tweet...')
 twiidikast.bind('<1>', kustuta_tekst)
-twiidikast.bind("<KeyPress>", validateTextInputSize)
+twiidikast.bind("<KeyPress>", twiidi_pikkuse_loendur)
 twiidikast.tag_add('hall tekst', '1.0', 'end')#algul tekst hall
 twiidikast.tag_configure('hall tekst', foreground = 'gray')
 
