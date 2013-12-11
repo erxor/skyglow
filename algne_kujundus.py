@@ -22,7 +22,7 @@ def get_search():
      twiidiala.yview('moveto', '0.0')
      for a in search:
           tweet = parem_twiit(a[0],a[1],a[2])
-          label=Label(twiidiala, image=twiidialataust, text=tweet,bd=0,padx=0, pady=0,fg=color2,font=("Segoe UI", 8),anchor=W,justify=LEFT,compound=CENTER)
+          label=Label(twiidiala, image=twiidialataust4,anchor=W, text=tweet,bd=0,padx=0, pady=0,fg=color2,font=("Segoe UI", 8),justify=LEFT,compound=CENTER)
           #label.pack()
           label.place(x=0,y=i)
           i += 60
@@ -134,36 +134,48 @@ def parem_twiit(name, user, tweet):
 
 def get_tweets_mina():
     c = 40
+    i = 0
     twiidiala.delete(ALL)#teeme tahvli puhtaks
     scrollbar.set(0.0, 0.43529411764705883)#liigutame scrollbari üles
     scrollbari_pikkus=len(tweets_me)*70
     twiidiala.config(scrollregion = (0,0,320,scrollbari_pikkus))
     twiidiala.yview('moveto', '0.0')#liigutame vaate üles
     for a in tweets_me:
-        parem_twiit(a[0], a[1], a[2], c)
-        c += 70
+          tweet = parem_twiit(a[0],a[1],a[2])
+          label=Label(twiidiala, image=twiidialataust3,anchor=W, text=tweet,bd=0,padx=0, pady=0,fg='white',font=("Segoe UI", 8),justify=LEFT,compound=CENTER)
+          #label.pack()
+          label.place(x=0,y=i)
+          i += 60
 
 def get_tweets():
     c = 40
+    i = 0
     twiidiala.delete(ALL)
     scrollbar.set(0.0, 0.43529411764705883)
     scrollbari_pikkus=len(tweets_home)*70
     twiidiala.config(scrollregion = (0,0,320,scrollbari_pikkus))
     twiidiala.yview('moveto', '0.0')
     for a in tweets_home:
-        parem_twiit(a[0], a[1], a[2], c)
-        c += 70
+          tweet = parem_twiit(a[0],a[1],a[2])
+          label=Label(twiidiala, image=twiidialataust1,anchor=W, text=tweet,bd=0,padx=0, pady=0,fg=color1,font=("Segoe UI", 8),justify=LEFT,compound=CENTER)
+          #label.pack()
+          label.place(x=0,y=i)
+          i += 60
 
 def get_mentions():
     c = 40
+    i = 0
     twiidiala.delete(ALL)
     scrollbar.set(0.0, 0.43529411764705883)
     scrollbari_pikkus=len(tweets_at)*70
     twiidiala.config(scrollregion = (0,0,320,scrollbari_pikkus))
     twiidiala.yview('moveto', '0.0')
     for a in tweets_at:
-        parem_twiit(a[0], a[1], a[2], c)
-        c += 70
+          tweet = parem_twiit(a[0],a[1],a[2])
+          label=Label(twiidiala, image=twiidialataust2,anchor=W, text=tweet,bd=0,padx=0, pady=0,fg='white',font=("Segoe UI", 8),justify=LEFT,compound=CENTER)
+          #label.pack()
+          label.place(x=0,y=i)
+          i += 60
                 
         
 color1 = '#0B3A58'
@@ -185,7 +197,10 @@ taustapilt.config(padx=0, pady=0, bd=-2)
 
 #loome scrollbari ja twiidiala
 twiidiala = Canvas(width = 340, height = 380)
-twiidialataust= PhotoImage(file = "tweet4.gif")
+twiidialataust4= PhotoImage(file = "tweet4.gif")
+twiidialataust3= PhotoImage(file = "tweet3.gif")
+twiidialataust2= PhotoImage(file = "tweet2.gif")
+twiidialataust1= PhotoImage(file = "tweet1.gif")
 #twiidiala.create_image(160,35, image =twiidialataust)
 twiidiala.config(background=color1)
 scrollbar = ttk.Scrollbar(twiidiala)
@@ -208,9 +223,9 @@ twitter = Twitter(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_S
 
 
 ###küsime tweete
-##refresh_home()
-##refresh_me()
-##refresh_at()
+refresh_home()
+refresh_me()
+refresh_at()
 #get_tweets()
 
 
