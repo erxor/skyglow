@@ -11,12 +11,22 @@ tweets_me = []
 tweets_at = []
 search = []
 
-def refresh_search():
-     statuses = twitter.search.tweets(q='Madiskarli')['statuses']
+def get_search():
+     otsingukast.lift()
+     c = 40
+     twiidiala.delete(ALL)
+     scrollbar.set(0.0, 0.43529411764705883)
+     scrollbari_pikkus=len(search)*70
+     twiidiala.config(scrollregion = (0,0,320,scrollbari_pikkus))
+     twiidiala.yview('moveto', '0.0')
+     for a in search:
+          parem_twiit(a[0], a[1], a[2], c)
+          c += 70
+     
+def refresh_search(event):
+     statuses = twitter.search.tweets(q=otsingukast.get())['statuses']
      säutsud = []
      for a in range(0,11):
-          twiidialataust= PhotoImage(file = "tweet4.gif")
-          twiidiala.create_image(160,35+a*20, image =twiidialataust)
           x = statuses[a]
           tweet = x['text'] #krabame dictist teksti
           user = (x['user'])['screen_name'] #krabame dicti subdictist username
@@ -27,6 +37,8 @@ def refresh_search():
           if i not in search:
                search.insert(0, i)
      säutsud = []
+     get_search()
+     otsingukast.lower()
      
 def refresh_home():
      statuses = twitter.statuses.home_timeline()
@@ -91,7 +103,6 @@ def validateTextInputSize(event):#Loendur toodab mingit jama counteri järgi, ku
      
 def säutsumine():
     if len(twiidikast.get('1.0',END))-1 >140:
-        #messagebox.showinfo("Viga!", message = "Twiit on liialt pikk. Maksimaalne lubatud pikkus on 140 tähemärki")
         pass
     else:
         twitter.statuses.update(status=twiidikast.get('1.0',END))
@@ -103,7 +114,6 @@ def kustuta_tekst(event):
     twiidikast.delete('1.0', END)
     twiidikast.configure(height = 5)
 
-
 def parem_twiit(name, user, tweet, yasukoht):
         tweet = wrap(tweet, width = 50)
         if len(tweet) == 1:
@@ -114,20 +124,8 @@ def parem_twiit(name, user, tweet, yasukoht):
              tweet = tweet[0]+'\n'+tweet[1]+'\n'+tweet[2]
         elif len(tweet) == 4:
              tweet = tweet[0]+'\n'+tweet[1]+'\n'+tweet[2]+'\n'+tweet[3]
-        twitterbox1_pilt = PhotoImage(file = "tweet4.gif")
-        twiidiala.create_text(2,yasukoht, text = (name+'   '+"@"+user+"\n"+tweet+'\n'), anchor = 'w', font =("Segoe UI", 8), fill = "white")
-        twiidiala.create_image(2,yasukoht, image =twitterbox1_pilt)
+        twiidiala.create_text(2,yasukoht, text = (name+'   '+"@"+user+"\n"+tweet+'\n'), anchor = 'w', font =("Segoe UI", 8), fill = "red")
 
-def get_search():
-     c = 40
-     twiidiala.delete(ALL)
-     scrollbar.set(0.0, 0.43529411764705883)
-     scrollbari_pikkus=len(search)*70
-     twiidiala.config(scrollregion = (0,0,320,scrollbari_pikkus))
-     twiidiala.yview('moveto', '0.0')
-     for a in search:
-          parem_twiit(a[0], a[1], a[2], c)
-          c += 70
 
 def get_tweets_mina():
     c = 40
@@ -150,9 +148,6 @@ def get_tweets():
     for a in tweets_home:
         parem_twiit(a[0], a[1], a[2], c)
         c += 70
-    twitterbox1_pilt = PhotoImage(file = "tweet4.gif")
-    twiidiala.create_image(0,0, image =twitterbox1_pilt)
-    #twiidiala.pack()
 
 def get_mentions():
     c = 40
@@ -185,8 +180,8 @@ taustapilt.config(padx=0, pady=0, bd=-2)
 #loome scrollbari ja twiidiala
 twiidiala = Canvas(width = 340, height = 380)
 twiidialataust= PhotoImage(file = "tweet4.gif")
-twiidiala.create_image(160,35, image =twiidialataust)
-#twiidiala.config(background=color1)
+#twiidiala.create_image(160,35, image =twiidialataust)
+twiidiala.config(background=color1)
 scrollbar = ttk.Scrollbar(twiidiala)
 twiidiala.configure(yscrollcommand = scrollbar.set, scrollregion = (0,0,320,800), highlightthickness = 0)
 twiidiala.place(x = 278, y = 20)
@@ -206,11 +201,10 @@ f.close()
 twitter = Twitter(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_SECRET)) #logib twitterisse
 
 
-#küsime tweete
-refresh_home()
-refresh_me()
-refresh_at()
-refresh_search()
+###küsime tweete
+##refresh_home()
+##refresh_me()
+##refresh_at()
 #get_tweets()
 
 
@@ -262,6 +256,11 @@ twiidiylemine_pilt = PhotoImage(file="raam_topp.gif")
 twiidiylemine['image'] = twiidiylemine_pilt
 twiidiylemine.config(bd=-2, padx = 0, pady=0)
 
+otsingukast = Entry(raam)
+otsingukast.place(x=300, y=40)
+otsingukast.bind("<Return>", refresh_search)
+otsingukast.lower()
+
 
 #logo osa
 logo = Label(raam)
@@ -270,7 +269,3 @@ logopilt = PhotoImage(file='logo.gif')
 logo['image'] = logopilt
 logo.config(bd=-2, padx = 0, pady=0)
 raam.mainloop()
-
-#twiitide taustad
-twitterbox1_pilt = PhotoImage(file = "tweet4.gif")
-twiidiala.create_image(0,0, image =twitterbox1_pilt)
