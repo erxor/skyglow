@@ -6,33 +6,28 @@ from os.path import isfile
 from tkinter import font
 from textwrap import wrap 
 
-
 tweets_home = []
 tweets_me = []
 tweets_at = []
 search = []
 
-
 def get_search():
-     c = 40
-     i=asukoht = 0
-     twiidiala.delete(ALL)
-     for i in range(6):
-          label=Label(twiidiala, image=twiidialataust4)
-          label.place(x=0,y=asukoht)
-          asukoht +=60
      otsingukast.lift()
+     c = 40
+     i=0
+     twiidiala.delete(ALL)
      scrollbar.set(0.0, 0.43529411764705883)
      scrollbari_pikkus=len(search)*70
      twiidiala.config(scrollregion = (0,0,320,scrollbari_pikkus))
      twiidiala.yview('moveto', '0.0')
      for a in search:
           tweet = parem_twiit(a[0],a[1],a[2])
-          label=Label(twiidiala, image=twiidialataust4,anchor=W, text=tweet,bd=0,padx=0, pady=0,fg=color2,font=("Segoe UI", 8),justify=LEFT,compound=CENTER)
+          #label=Label(twiidiala, image=twiidialataust4,anchor=NW, text=tweet,bd=0,padx=0, pady=0,fg=color2,font=("Segoe UI", 8),justify=LEFT,compound=CENTER)
           #label.pack()
-          label.place(x=0,y=i)
+          #label.place(x=0,y=i)
+          twiidiala.create_image(160,35+i, image =twiidialataust4)
+          tekst = twiidiala.create_text(5,40+i, anchor=W, text = tweet, fill=color2, font=("Segoe UI", 8))
           i += 60
-   
      
 def refresh_search(event):
      statuses = twitter.search.tweets(q=otsingukast.get())['statuses']
@@ -50,7 +45,6 @@ def refresh_search(event):
      säutsud = []
      get_search()
      otsingukast.lower()
-   
      
 def refresh_home():
      statuses = twitter.statuses.home_timeline()
@@ -67,7 +61,6 @@ def refresh_home():
                tweets_home.insert(0, i)
      säutsud = []
 
-
 def refresh_me():
      statuses = twitter.statuses.user_timeline()
      säutsud = []
@@ -82,7 +75,6 @@ def refresh_me():
           if i not in tweets_me:
                tweets_me.insert(0, i)
 
-
 def refresh_at():
      statuses = twitter.statuses.mentions_timeline()
      säutsud = []
@@ -96,7 +88,6 @@ def refresh_at():
      for i in säutsud:
           if i not in tweets_at:
                tweets_at.insert(0, i)
-
 
 def refresh():
      refresh_home()
@@ -124,12 +115,10 @@ def säutsumine():
         twiidikast.delete('1.0', END)
         twiidikast.insert('1.0', 'Sisesta siia oma tweet...')
         twiidikast.tag_add('hall tekst', '1.0', 'end')
-  
      
 def kustuta_tekst(event):
     twiidikast.delete('1.0', END)
     twiidikast.configure(height = 5)
-
 
 def parem_twiit(name, user, tweet):
         tweet = wrap(tweet, width = 50)
@@ -146,7 +135,6 @@ def parem_twiit(name, user, tweet):
 
 
 def get_tweets_mina():
-    otsingukast.lower()
     c = 40
     i = 0
     twiidiala.delete(ALL)#teeme tahvli puhtaks
@@ -156,16 +144,16 @@ def get_tweets_mina():
     twiidiala.yview('moveto', '0.0')#liigutame vaate üles
     for a in tweets_me:
           tweet = parem_twiit(a[0],a[1],a[2])
-          label=Label(twiidiala, image=twiidialataust3,anchor=W, text=tweet,bd=0,padx=0, pady=0,fg='white',font=("Segoe UI", 8),justify=LEFT,compound=CENTER)
-          #label.pack()
-          label.place(x=0,y=i)
+          #label=Label(twiidiala, image=twiidialataust3,position=0.0, text=tweet,bd=0,padx=0, pady=0,fg='white',font=("Segoe UI", 8),justify=LEFT,compound=CENTER)
+          #label.pack(fill=X)
+          #label.place(x=0,y=i)
+          twiidiala.create_image(160,35+i, image =twiidialataust3)
+          tekst = twiidiala.create_text(5,40+i, anchor=W, text = tweet, fill="white", font=("Segoe UI", 8))
           i += 60
-
 
 def get_tweets():
     c = 40
     i = 0
-    otsingukast.lower()
     twiidiala.delete(ALL)
     scrollbar.set(0.0, 0.43529411764705883)
     scrollbari_pikkus=len(tweets_home)*70
@@ -173,16 +161,16 @@ def get_tweets():
     twiidiala.yview('moveto', '0.0')
     for a in tweets_home:
           tweet = parem_twiit(a[0],a[1],a[2])
-          label=Label(twiidiala, image=twiidialataust1,anchor=W, text=tweet,bd=0,padx=0, pady=0,fg=color1,font=("Segoe UI", 8),justify=LEFT,compound=CENTER)
+          #label=Label(twiidiala, anchor=W, image=twiidialataust1,text=tweet,bd=0,padx=0,pady=0,fg=color1,font=("Segoe UI", 8),justify=LEFT,compound=CENTER)
           #label.pack()
-          label.place(x=0,y=i)
+          #label.place(x=0,y=i)
+          twiidiala.create_image(160,35+i, image =twiidialataust1)
+          tekst = twiidiala.create_text(5,40+i, anchor=W, text = tweet, fill=color1, font=("Segoe UI", 8))
           i += 60
-
 
 def get_mentions():
     c = 40
     i = 0
-    otsingukast.lower()
     twiidiala.delete(ALL)
     scrollbar.set(0.0, 0.43529411764705883)
     scrollbari_pikkus=len(tweets_at)*70
@@ -190,15 +178,16 @@ def get_mentions():
     twiidiala.yview('moveto', '0.0')
     for a in tweets_at:
           tweet = parem_twiit(a[0],a[1],a[2])
-          label=Label(twiidiala, image=twiidialataust2,anchor=W, text=tweet,bd=0,padx=0, pady=0,fg='white',font=("Segoe UI", 8),justify=LEFT,compound=CENTER)
+          #label=Label(twiidiala, image=twiidialataust2,anchor=W, text=tweet,bd=0,padx=0, pady=0,fg='white',font=("Segoe UI", 8),justify=LEFT,compound=CENTER)
           #label.pack()
-          label.place(x=0,y=i)
+          #label.place(x=0,y=i)
+          twiidiala.create_image(160,35+i, image =twiidialataust2)
+          tekst = twiidiala.create_text(5,40+i, anchor=W, text = tweet, fill="white", font=("Segoe UI", 8))
           i += 60
                 
         
 color1 = '#0B3A58'
 color2 = '#5aac8c'
-
 #loob akna
 raam = Tk()
 raam.title("Skyglow")
@@ -207,14 +196,12 @@ raam.option_add("*Font", ("Segoe UI", 10))#font
 paksFont = ("Times", 20, "bold")
 #raam.resizable(width=FALSE, height=FALSE)
 
-
 #loome taustapildi
 taustapilt = Label(raam)
 taustapilt.place(x=0, y=0)
 taust = PhotoImage(file='selg.gif')
 taustapilt['image'] = taust
 taustapilt.config(padx=0, pady=0, bd=-2)
-
 
 #loome scrollbari ja twiidiala
 twiidiala = Canvas(width = 340, height = 380)
@@ -229,7 +216,6 @@ twiidiala.configure(yscrollcommand = scrollbar.set, scrollregion = (0,0,320,800)
 twiidiala.place(x = 278, y = 20)
 scrollbar.place(x = 320, y = 0, height = 380)
 scrollbar.configure(command=twiidiala.yview)
-
 
 #twitteri jama
 CONSUMER_KEY = "OyremhLVargLoqBAG2PZwQ" #voldemari consumer key
@@ -256,28 +242,25 @@ nupp1_taust = PhotoImage(file="nupp1.gif")
 nupp2_taust = PhotoImage(file="nupp2.gif")
 nupp3_taust = PhotoImage(file="nupp3.gif")
 nupp4_taust = PhotoImage(file="nupp4.gif")
-
-
 #loob nupud
 nupp0 = Label(raam)
 nupp0.config(width= 8)
 nupp0.grid (column = 2, row=1)
 nupp0.lower()
 nupp1 = Button(raam,command = get_tweets)
-nupp2 = Button(raam,command = get_mentions)
-nupp3 = Button(raam,command = get_tweets_mina)
-nupp4 = Button(raam, command = get_search)
-nupp5 = Button(raam, text="Säutsu", command = säutsumine)
 nupp1.grid(column=3, row=1)
-nupp2.grid(column=4, row=1)
-nupp3.grid(column=5, row=1)
-nupp4.grid(column=6, row=1)
-nupp5.grid(column=1, row=5, pady=2, sticky = (E))
 nupp1.config(image=nupp1_taust, width = 80, height = 20, bd=0, highlightthickness=0)
+nupp2 = Button(raam,command = get_mentions)
+nupp2.grid(column=4, row=1)
 nupp2.config(image=nupp2_taust, width = 80, height = 20, bd=0,highlightthickness=0)
+nupp3 = Button(raam,command = get_tweets_mina)
+nupp3.grid(column=5, row=1)
 nupp3.config(image=nupp3_taust, width = 80, height = 20, bd=0, highlightthickness=0)
+nupp4 = Button(raam, command = get_search)
+nupp4.grid(column=6, row=1)
 nupp4.config(image=nupp4_taust, width = 80, height = 20, bd=0, highlightthickness=0)
-
+nupp5 = Button(raam, text="Säutsu", command = säutsumine)
+nupp5.grid(column=1, row=5, pady=2, sticky = (E))
 
 #säutsu sisestamine
 twiidikast = Text(raam, width=30, height=1, wrap = 'word')
