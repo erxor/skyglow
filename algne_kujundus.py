@@ -17,7 +17,7 @@ def get_search():
      c = 40
      i=j=0
      twiidiala.delete(ALL)
-     if len(search) == 0:
+     if len(search) == 0: #kui varem pole midagi otsitud, siis loome tausta
           for i in range(7):
                twiidiala.create_image(160,35+j, image =twiidialataust4)
                j += 60
@@ -162,7 +162,8 @@ def get_tweets_mina():
 def get_tweets():
     c = 40
     i = 0
-    otsingukast.lower
+    if kontrollmuutuja ==1:
+         otsingukast.lower()
     twiidiala.delete(ALL)
     scrollbar.set(0.0, 0.43529411764705883)
     scrollbari_pikkus=10+ len(tweets_home)*60
@@ -241,10 +242,11 @@ twitter = Twitter(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_S
 
 
 #küsime tweete
+kontrollmuutuja = 0
 refresh_home()
 refresh_me()
 refresh_at()
-#get_tweets()
+get_tweets()
 
 
 #loob nupud
@@ -305,7 +307,7 @@ otsingukast = Entry(raam)
 otsingukast.place(x=300, y=40)
 otsingukast.bind("<Return>", refresh_search)
 otsingukast.lower()
-
+kontrollmuutuja = 1
 
 #logo osa
 logo = Label(raam)
