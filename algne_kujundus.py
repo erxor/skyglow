@@ -107,10 +107,10 @@ def refresh():
 def validateTextInputSize(event):#Loendur toodab mingit jama counteri järgi, kui see läheb alla 10, võiks kohe ilmuda
      arv = (140-(len(twiidikast.get('1.0',END))-1))
      loendur = ttk.Label(raam, text = ' '+str(arv))
-     loendur.config(background = color1)
-     loendur.grid(column=1, row = 5)
+     loendur.config(background = "white")
+     loendur.place(x=117, y = 243)
      if arv > -1:
-          loendur.configure(background = color1, foreground = "white")
+          loendur.configure(foreground = "black")
      if arv < 0:
           loendur.configure(foreground = "red")
 
@@ -187,9 +187,6 @@ def get_mentions():
     twiidiala.yview('moveto', '0.0')
     for a in tweets_at:
           tweet = parem_twiit(a[0],a[1],a[2])
-          #label=Label(twiidiala, image=twiidialataust2,anchor=W, text=tweet,bd=0,padx=0, pady=0,fg='white',font=("Segoe UI", 8),justify=LEFT,compound=CENTER)
-          #label.pack()
-          #label.place(x=0,y=i)
           twiidiala.create_image(160,35+i, image =twiidialataust2)
           tekst = twiidiala.create_text(5,40+i, anchor=W, text = tweet, fill="white", font=("Segoe UI", 8))
           i += 60
@@ -311,7 +308,7 @@ kontrollmuutuja = 1
 
 #logo osa
 logo = Label(raam)
-logo.place(x=0, y=243)
+logo.place(x=0, y=218)
 logopilt = PhotoImage(file='logo.gif')
 logo['image'] = logopilt
 logo.config(bd=-2, padx = 0, pady=0)
