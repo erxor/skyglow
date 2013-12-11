@@ -122,6 +122,8 @@ def get_search():
      c = 40
      twiidiala.delete(ALL)
      scrollbar.set(0.0, 0.43529411764705883)
+     scrollbari_pikkus=len(search)*70
+     twiidiala.config(scrollregion = (0,0,320,scrollbari_pikkus))
      twiidiala.yview('moveto', '0.0')
      for a in search:
           parem_twiit(a[0], a[1], a[2], c)
@@ -131,6 +133,8 @@ def get_tweets_mina():
     c = 40
     twiidiala.delete(ALL)#teeme tahvli puhtaks
     scrollbar.set(0.0, 0.43529411764705883)#liigutame scrollbari üles
+    scrollbari_pikkus=len(tweets_me)*70
+    twiidiala.config(scrollregion = (0,0,320,scrollbari_pikkus))
     twiidiala.yview('moveto', '0.0')#liigutame vaate üles
     for a in tweets_me:
         parem_twiit(a[0], a[1], a[2], c)
@@ -140,6 +144,8 @@ def get_tweets():
     c = 40
     twiidiala.delete(ALL)
     scrollbar.set(0.0, 0.43529411764705883)
+    scrollbari_pikkus=len(tweets_home)*70
+    twiidiala.config(scrollregion = (0,0,320,scrollbari_pikkus))
     twiidiala.yview('moveto', '0.0')
     for a in tweets_home:
         parem_twiit(a[0], a[1], a[2], c)
@@ -149,6 +155,8 @@ def get_mentions():
     c = 40
     twiidiala.delete(ALL)
     scrollbar.set(0.0, 0.43529411764705883)
+    scrollbari_pikkus=len(tweets_at)*70
+    twiidiala.config(scrollregion = (0,0,320,scrollbari_pikkus))
     twiidiala.yview('moveto', '0.0')
     for a in tweets_at:
         parem_twiit(a[0], a[1], a[2], c)
