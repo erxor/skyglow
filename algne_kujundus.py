@@ -36,6 +36,7 @@ def get_search():
 def refresh_search(event):
      statuses = twitter.search.tweets(q=otsingukast.get())['statuses']
      säutsud = []
+     del search[:]
      for a in range(0,11):
           x = statuses[a]
           tweet = x['text'] #krabame dictist teksti
@@ -44,8 +45,7 @@ def refresh_search(event):
           säuts = [name, user, tweet]
           säutsud.insert(0, säuts)
      for i in säutsud:
-          if i not in search:
-               search.insert(0, i)
+          search.insert(0, i)
      säutsud = []
      get_search()
      otsingukast.lower()
