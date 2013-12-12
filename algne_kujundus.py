@@ -1,3 +1,12 @@
+#Projekti autorid : Madis-Karli Koppel ja Erki Lomp
+#Visuaalide autor Mairon Tähe (Mansion of Mass Design)
+
+#Vajalikud moodulid : https://pypi.python.org/pypi/twitter/1.10.0
+#                     http://www.lfd.uci.edu/~gohlke/pythonlibs/
+#              	setuptools-1.1.6.win-amd64-py3.2.exe
+#               	setuptools-1.1.6.win-amd64-py3.3.exe
+
+
 from tkinter import *
 from tkinter import ttk
 from twitter import *
