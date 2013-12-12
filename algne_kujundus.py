@@ -36,8 +36,8 @@ def get_search():
 def refresh_search(event):
      statuses = twitter.search.tweets(q=otsingukast.get())['statuses']
      säutsud = []
-     del search[:]
-     for a in range(0,11):
+     del search [:]
+     for a in range(0,15):
           x = statuses[a]
           tweet = x['text'] #krabame dictist teksti
           user = (x['user'])['screen_name'] #krabame dicti subdictist username
@@ -101,7 +101,6 @@ def refresh():
      refresh_home()
      refresh_me()
      refresh_at()
-     refresh_search()
           
      
 def twiidi_pikkuse_loendur(event):#Loendur toodab mingit jama counteri järgi, kui see läheb alla 10, võiks kohe ilmuda
@@ -111,12 +110,16 @@ def twiidi_pikkuse_loendur(event):#Loendur toodab mingit jama counteri järgi, k
      loendur.place(x=117, y = 243)
      if arv < 100:
           loendur.config(text = "  " + str(arv) + "  ")
-     if arv < 10:
-          loendur.config(text = "   " + str(arv) + " ")
+          if arv < 10:
+               loendur.config(text = "   " + str(arv) + " ")
      if arv > -1:
           loendur.configure(foreground = "black")
      if arv < 0:
           loendur.configure(foreground = "red")
+          if arv < -9:
+               loendur.config(text = " " + str(arv) + "  ")
+               if arv < -99:
+                    loendur.config(text= "#!?/")
 
      
 def säutsumine():
@@ -127,6 +130,7 @@ def säutsumine():
         twiidikast.delete('1.0', END)
         twiidikast.insert('1.0', 'Sisesta siia oma tweet...')
         twiidikast.tag_add('hall tekst', '1.0', 'end')
+        refresh()
 
      
 def kustuta_tekst(event):
@@ -244,11 +248,14 @@ twitter = Twitter(auth=OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_S
 
 #küsime tweete
 kontrollmuutuja = 0
-refresh_home()
-refresh_me()
-refresh_at()
+refresh()
 get_tweets()
 
+
+#uuendame twiite iga 30 s taga
+for i in range(1, 1000):
+     aeg = 30000*i
+     raam.after(aeg, refresh)
 
 #loob nupud
 nupp1_taust = PhotoImage(file="nupp1.gif")
@@ -256,6 +263,7 @@ nupp2_taust = PhotoImage(file="nupp2.gif")
 nupp3_taust = PhotoImage(file="nupp3.gif")
 nupp4_taust = PhotoImage(file="nupp4.gif")
 nupp5_taust = PhotoImage(file="säutsu.gif")
+nupp6_taust = PhotoImage(file="logo.gif")
 
 nupp0 = Label(raam)
 nupp0.config(width= 8)
@@ -267,18 +275,22 @@ nupp2 = Button(raam, command = get_mentions)
 nupp3 = Button(raam, command = get_tweets_mina)
 nupp4 = Button(raam, command = get_search)
 nupp5 = Button(raam, command = säutsumine)
+nupp6 = Button(raam, command = refresh)
 
 nupp1.grid(column=3, row=1)
 nupp2.grid(column=4, row=1)
 nupp3.grid(column=5, row=1)
 nupp4.grid(column=6, row=1)
 nupp5.grid(column=1, row=5, pady=2, sticky = (E))
+nupp6.place(x = 0, y = 218)
 
-nupp1.config(image=nupp1_taust, width = 80, height = 20, bd = 0, highlightthickness = 0)
-nupp2.config(image=nupp2_taust, width = 80, height = 20, bd = 0, highlightthickness = 0)
-nupp3.config(image=nupp3_taust, width = 80, height = 20, bd = 0, highlightthickness = 0)
-nupp4.config(image=nupp4_taust, width = 80, height = 20, bd = 0, highlightthickness = 0)
-nupp5.config(image=nupp5_taust, width = 60, height = 30, bd = 0, highlightthickness = 0) 
+nupp1.config(image=nupp1_taust, bd = 0, highlightthickness = 0)
+nupp2.config(image=nupp2_taust, bd = 0, highlightthickness = 0)
+nupp3.config(image=nupp3_taust, bd = 0, highlightthickness = 0)
+nupp4.config(image=nupp4_taust, bd = 0, highlightthickness = 0)
+nupp5.config(image=nupp5_taust, bd = 0, highlightthickness = 0) 
+nupp6.config(image=nupp6_taust, bd = 0, highlightthickness = 0)
+
 
 #säutsu sisestamine
 twiidikast = Text(raam, width=30, height=1, wrap = 'word')
@@ -311,10 +323,5 @@ otsingukast.bind("<Return>", refresh_search)
 otsingukast.lower()
 kontrollmuutuja = 1
 
-#logo osa
-logo = Label(raam)
-logo.place(x=0, y=218)
-logopilt = PhotoImage(file='logo.gif')
-logo['image'] = logopilt
-logo.config(bd=-2, padx = 0, pady=0)
+
 raam.mainloop()
